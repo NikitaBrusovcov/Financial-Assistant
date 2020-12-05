@@ -9,4 +9,5 @@ public interface AdminDAO {
     public void updatePassword(Admin admin);
     public List<Admin> findAllAdmins();
     public void createAdmin(Admin admin);
+    public void deleteAdmin(Admin admin);
 }

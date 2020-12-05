@@ -69,9 +69,9 @@
             </div>
         </section>
     </form>
-    <form>
+    <form action="${pageContext.request.contextPath}/deleteProfileButton">
         <button>
-            <fmt:message key="label.delete"/> <fmt:message key="label.profile"/>
+            <fmt:message key="label.delete"/>
         </button>
     </form>
 </div>

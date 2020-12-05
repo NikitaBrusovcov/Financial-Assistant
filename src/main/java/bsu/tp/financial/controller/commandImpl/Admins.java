@@ -4,6 +4,7 @@ import bsu.tp.financial.controller.Command;
 import bsu.tp.financial.controller.CommandName;
 import bsu.tp.financial.entity.Admin;
 import bsu.tp.financial.entity.User;
+import bsu.tp.financial.exception.CommandException;
 import bsu.tp.financial.service.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +17,12 @@ public class Admins implements Command {
 
     @Override
     public CommandName callCommandMethod(HttpServletRequest req) {
-        List<Admin> admins = adminService.findAllAdmins();
+        List<Admin> admins;
+        try {
+            admins = adminService.findAllAdmins();
+        } catch (RuntimeException exception){
+            throw new CommandException("Admins failed ", exception);
+        }
         req.setAttribute("admins", admins);
         return CommandName.ADMINS;
     }

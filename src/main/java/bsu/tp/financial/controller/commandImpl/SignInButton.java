@@ -4,15 +4,20 @@ import bsu.tp.financial.controller.Command;
 import bsu.tp.financial.controller.CommandName;
 import bsu.tp.financial.entity.Admin;
 import bsu.tp.financial.entity.User;
+import bsu.tp.financial.exception.CommandException;
 import bsu.tp.financial.service.AdminService;
 import bsu.tp.financial.service.SecurityService;
 import bsu.tp.financial.service.ServiceFactory;
 import bsu.tp.financial.service.UserService;
 import bsu.tp.financial.util.HttpUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 
 public class SignInButton implements Command {
+
+    private final Logger logger = LoggerFactory.getLogger(SignInButton.class);
 
     ServiceFactory serviceFactory = ServiceFactory.getInstance();
     UserService userService = serviceFactory.getUserService();
@@ -22,28 +27,27 @@ public class SignInButton implements Command {
     @Override
     public CommandName callCommandMethod(HttpServletRequest req) {
         if (HttpUtils.isMethodGet(req)) {
-            //logger.info("Failed, call method get in signIn page.");
-            //return CommandName.ERROR.getCommand().callCommandMethod(req);
+            logger.info("Failed, call method get in signInButton");
+            throw new CommandException("SignInButton failed",  new RuntimeException());
         }
 
-        String email = req.getParameter("email");
-        String password = req.getParameter("password");
+        String email = HttpUtils.checkRequestParameter(req, "email");
+        String password = HttpUtils.checkRequestParameter(req, "password");
 
         try {
             if (signInUser(req, email, password)) {
-                //logger.info("User: " + email + " sign in.");
+                logger.info("User: " + email + " signIn.");
                 return CommandName.PROFILE;
             }
             if (signInAdmin(req, email, password)) {
-                //logger.info("Admin: " + email + " sign in.");
+                logger.info("Admin: " + email + " signIn.");
                 return CommandName.ADMIN_PROFILE;
-                //return CommandName.EDIT_ADMIN_INFORMATION_BUTTON;
             }
         } catch (RuntimeException exception) {
-            //throw new CommandException("Sign in failed ", exception);
+            throw new CommandException("Sign in failed ", exception);
         }
 
-        //logger.info("Invalid signIn information. (Email: " + req.getParameter("email") + ")");
+        logger.info("Invalid signIn information. (Email: " + email + ")");
         return CommandName.SIGN_IN_BUTTON;
     }
 

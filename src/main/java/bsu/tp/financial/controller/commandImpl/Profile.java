@@ -9,11 +9,15 @@ import bsu.tp.financial.exception.CommandException;
 import bsu.tp.financial.service.ServiceFactory;
 import bsu.tp.financial.service.UserService;
 import bsu.tp.financial.util.HttpUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public class Profile implements Command {
+
+    private final Logger logger = LoggerFactory.getLogger(Profile.class);
 
     ServiceFactory serviceFactory = ServiceFactory.getInstance();
     UserService userService = serviceFactory.getUserService();
@@ -22,12 +26,8 @@ public class Profile implements Command {
     public CommandName callCommandMethod(HttpServletRequest req) {
 
         User user = null;
-        try {
-            user = getUpdatedUser(req);
-            req.setAttribute("currencies", Currency.values());
-        } catch (RuntimeException exception) {
-            throw new CommandException("Get updated user failed ", exception);
-        }
+        user = getUpdatedUser(req);
+        req.setAttribute("currencies", Currency.values());
 
         switch (req.getPathInfo()) {
             case ("/personalInfo"): {
@@ -41,10 +41,9 @@ public class Profile implements Command {
             }
             case ("/statement"): {
                 int id = Integer.parseInt(HttpUtils.checkRequestParameter(req, "id"));
-                if (findBankAccount(user.getBankAccountList(), id, req)){
+                if (setBankAccountInRequest(user.getBankAccountList(), id, req)) {
                     return CommandName.STATEMENT;
-                }
-                else{
+                } else {
                     throw new CommandException("Get statement failed, id doesn't exist ", new RuntimeException());
                 }
             }
@@ -53,10 +52,13 @@ public class Profile implements Command {
             }
             case ("/editBankAccount"): {
                 int id = Integer.parseInt(HttpUtils.checkRequestParameter(req, "id"));
-                findBankAccount(user.getBankAccountList(), id, req);
-                return CommandName.EDIT_BANK_ACCOUNT;
+                if (setBankAccountInRequest(user.getBankAccountList(), id, req)) {
+                    return CommandName.EDIT_BANK_ACCOUNT;
+                } else {
+                    throw new CommandException("EditBankAccount failed, id doesn't exist ", new RuntimeException());
+                }
             }
-            case ("/unitBankAccounts"):{
+            case ("/unitBankAccounts"): {
                 return CommandName.UNIT_BANK_ACCOUNTS;
             }
             default: {
@@ -67,23 +69,19 @@ public class Profile implements Command {
 
     private User getUpdatedUser(HttpServletRequest req) {
         User user = (User) req.getSession().getAttribute("user");
-        user = userService.findUserById(user.getId());
+        try {
+            user = userService.findUserById(user.getId());
+        } catch (RuntimeException exception) {
+            throw new CommandException("Profile failed", exception);
+        }
         HttpUtils.updateSession(req, "user", user);
         return user;
     }
 
-    private int getId(HttpServletRequest req){
-        if(req.getParameter("id") == null){
-            throw new CommandException("Get statement failed, id - null ", new RuntimeException());
-        }
-        else{
-            return Integer.parseInt(req.getParameter("id"));
-        }
-    }
 
-    private boolean findBankAccount(List<BankAccount> bankAccounts, int id, HttpServletRequest req){
-        for (BankAccount bankAccount : bankAccounts){
-            if(bankAccount.getId() == id){
+    private boolean setBankAccountInRequest(List<BankAccount> bankAccounts, int id, HttpServletRequest req) {
+        for (BankAccount bankAccount : bankAccounts) {
+            if (bankAccount.getId() == id) {
                 req.setAttribute("bankAccount", bankAccount);
                 return true;
             }

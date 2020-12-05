@@ -62,4 +62,14 @@ public class AdminServiceImpl implements AdminService {
 //            throw new ServiceException("message", daoException);
 //        }
     }
+
+    @Override
+    public void deleteAdmin(Admin admin) {
+        adminDAO.deleteAdmin(admin);
+//        try {
+//            return adminDAO.findByEmail(email);
+//        } catch (DAOException daoException) {
+//            throw new ServiceException("message", daoException);
+//        }
+    }
 }

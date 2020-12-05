@@ -9,12 +9,7 @@ public enum CommandName {
     EDIT_PROFILE_BUTTON("/editProfile.jsp", new ChangePasswordButton()),
     UPDATE_MONEY_VALUE_BUTTON("/editBankAccountsMoneyValue", new UpdateMoneyValueButton()),
     DELETE_PROFILE_BUTTON("/deleteProfileButton", new DeleteProfileButton()),
-    DELETE_USER_BY_ADMIN_BUTTON("deleteUserByAdminButton", new DeleteUserByAdminButton()),
-//    EDIT_ADMIN_INFORMATION_BUTTON("/admin/profile", new EditAdminInformationButton()),
-//    ADMIN_EDIT_SPECIALTY_EXAM_BUTTON("/admin/profile", new AdminUpdateSpecialtyExamsButton()),
-//    ADMIN_UPDATE_PASSWORD_BUTTON("/admin/profile", new AdminUpdatePasswordButton()),
-//    ADMIN_REQUESTS_BUTTON("/admin/requests", new AdminRequestsButton()),
-//    //EDIT_ADMIN_INFORMATION("/adminEditInformation.jsp", new EditAdminInformation()),
+    DELETE_USER_BY_ADMIN_BUTTON("/deleteUserByAdminButton", new DeleteUserByAdminButton()),
     EDIT_BANK_ACCOUNT_BUTTON("/editBankAccount", new EditBankAccountButton()),
     CREATE_ADMIN_BUTTON("/admins", new CreateAdminButton()),
     ADMINS("/adminAdmins.jsp", new Admins()),
@@ -32,11 +27,6 @@ public enum CommandName {
     EDIT_PROFILE("/editProfile.jsp", new Profile()),
     SEND_EMAIL_STATEMENT_BUTTON("/sendEmailStatementButton", new SendEmailStatementButton()),
     UNIT_BANKACCOUNTS_BUTTON("/profile" , new UnitBankAccountsButton());
-//    FACULTY_PAGE("/faculty.jsp", new FacultyPage()),
-//    //LANGUAGE_BUTTON("/language.jsp", new LanguageButton()),
-//    ERROR("/error", new Error());
-//    //MAIN_PAGE("/", new MainPage());
-
 
     private final String jspAddress;
     private final Command command;

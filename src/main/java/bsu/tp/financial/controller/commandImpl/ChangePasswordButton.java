@@ -8,54 +8,71 @@ import bsu.tp.financial.exception.CommandException;
 import bsu.tp.financial.service.*;
 import bsu.tp.financial.util.HttpUtils;
 import bsu.tp.financial.util.PasswordValidator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 
 public class ChangePasswordButton implements Command {
-    //private final Logger logger = LoggerFactory.getLogger(SignUpButton.class);
+
+    private final Logger logger = LoggerFactory.getLogger(ChangePasswordButton.class);
 
     ServiceFactory serviceFactory = ServiceFactory.getInstance();
     UserService userService = serviceFactory.getUserService();
     AdminService adminService = serviceFactory.getAdminService();
-    BankAccountService bankAccountService = serviceFactory.getBankAccountService();
     SecurityService securityService = serviceFactory.getSecurityService();
 
     @Override
     public CommandName callCommandMethod(HttpServletRequest req) {
         if (HttpUtils.isMethodGet(req)) {
-            //logger.info("Failed, call method get in signUp page.");
-            //return CommandName.ERROR.getCommand().callCommandMethod(req);
+            logger.info("Failed, call method get in ChangePasswordButton");
+            throw new CommandException("ChangePasswordButton failed", new RuntimeException());
         }
 
         User user = (User) req.getSession().getAttribute("user");
         Admin admin = (Admin) req.getSession().getAttribute("admin");
         String oldPassword = HttpUtils.checkRequestParameter(req, "oldPassword");
-        if(securityService.equalsPassword(oldPassword, user.getPassword())){
+
+        char[] oldAccountPassword = user != null ? user.getPassword() : admin != null ? admin.getPassword() : null;
+        String email = user != null ? user.getEmail() : admin != null ? admin.getEmail() : null;
+
+        if(securityService.equalsPassword(oldPassword, oldAccountPassword)){
             if(!PasswordValidator.validatePassword(req)){
-                //logger.info("Failed signUp, passwords didn't match. (Email: " + req.getParameter("email") + ")");
-                throw new CommandException("Change password failed, new passwords do not match ", new RuntimeException());
+                logger.info("Failed ChangePasswordButton, passwords didn't match. (Email: " + email + ")");
+                throw new CommandException("ChangePasswordButton failed, new passwords don't match ", new RuntimeException());
             }
             char[] password = securityService.createPassword(HttpUtils.checkRequestParameter(req, "password"));
+            updatePassword(user, admin, password);
+        } else{
+            logger.info("Failed ChangePasswordButton, old passwords wrong. (Email: " + email + ")");
+            throw new CommandException("ChangePasswordButton failed, old passwords wrong", new RuntimeException());
+        }
 
-        }
-        else{
-            //logger.info("Failed signUp, passwords didn't match. (Email: " + req.getParameter("email") + ")");
-            throw new CommandException("Change password failed, old passwords do not match ", new RuntimeException());
-        }
+        logger.info("Password was changed. (Email: " + email + ")");
         req.getSession().invalidate();
+        logger.info(email + " signOut");
         return CommandName.SIGN_OUT_BUTTON;
     }
 
     private void updatePassword(User user, Admin admin, char[] password){
         if (user != null){
             user.setPassword(password);
-            userService.updateUser(user);
+            try {
+                userService.updateUser(user);
+            } catch (RuntimeException exception){
+                throw new CommandException("ChangePasswordButton failed", exception);
+            }
             return;
         }
         if (admin != null){
             admin.setPassword(password);
-            adminService.updatePassword(admin);
+            try {
+                adminService.updatePassword(admin);
+            } catch (RuntimeException exception){
+                throw new CommandException("ChangePasswordButton failed", exception);
+            }
             return;
         }
     }
+
 }

@@ -5,47 +5,64 @@ import bsu.tp.financial.controller.CommandName;
 import bsu.tp.financial.entity.BankAccount;
 import bsu.tp.financial.entity.Currency;
 import bsu.tp.financial.entity.User;
+import bsu.tp.financial.exception.CommandException;
 import bsu.tp.financial.service.*;
 import bsu.tp.financial.util.BankAccountUtils;
 import bsu.tp.financial.util.HttpUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 
 public class EditBankAccountButton implements Command {
 
-    //private final Logger logger = LoggerFactory.getLogger(SignUpButton.class);
+    private final Logger logger = LoggerFactory.getLogger(EditBankAccountButton.class);
 
     ServiceFactory serviceFactory = ServiceFactory.getInstance();
-    UserService userService = serviceFactory.getUserService();
     BankAccountService bankAccountService = serviceFactory.getBankAccountService();
-    SecurityService securityService = serviceFactory.getSecurityService();
-    OperationService operationService = serviceFactory.getOperationService();
 
     @Override
     public CommandName callCommandMethod(HttpServletRequest req) {
 
-        String action = req.getParameter("actionBankAccount");
+        String action = HttpUtils.checkRequestParameter(req, "actionBankAccount");
         User user = (User) req.getSession().getAttribute("user");
 
         if (action.equals("add")){
             BankAccount bankAccount = createBankAccount(req);
-            bankAccountService.createBankAccount(bankAccount, user);
+            try {
+                bankAccountService.createBankAccount(bankAccount, user);
+            } catch (RuntimeException exception){
+                throw new CommandException("EditBankAccountButton failed ", exception);
+            }
+            logger.info(user.getEmail() + " create bankAccount " + bankAccount.getTitle() + " (id = " + bankAccount.getId() + ")");
         }
 
         if(action.equals("delete")){
             int id = Integer.parseInt(HttpUtils.checkRequestParameter(req, "id"));
             BankAccount bankAccount = BankAccountUtils.findBankAccountFromUser(id, user);
-            bankAccountService.deleteBankAccount(bankAccount);
+            try {
+                bankAccountService.deleteBankAccount(bankAccount);
+            } catch (RuntimeException exception){
+                throw new CommandException("EditBankAccountButton failed ", exception);
+            }
+            logger.info(user.getEmail() + " delete bankAccount " + bankAccount.getTitle() + " (id = " + bankAccount.getId() + ")");
         }
 
         if(action.equals("edit")){
             int id = Integer.parseInt(HttpUtils.checkRequestParameter(req, "id"));
             String title = HttpUtils.checkRequestParameter(req, "title");
             BankAccount bankAccount = BankAccountUtils.findBankAccountFromUser(id, user);
+            String oldTitle = bankAccount.getTitle();
             bankAccount.setTitle(title);
-            bankAccountService.updateBankAccount(bankAccount);
+            try {
+                bankAccountService.updateBankAccount(bankAccount);
+            } catch (RuntimeException exception){
+                throw new CommandException("EditBankAccountButton failed ", exception);
+            }
+            logger.info(user.getEmail() + " edit bankAccount " + bankAccount.getTitle() + " (id = " + bankAccount.getId() + "), old title = " + oldTitle);
         }
+
         return CommandName.BANK_ACCOUNTS_BUTTON;
     }
 

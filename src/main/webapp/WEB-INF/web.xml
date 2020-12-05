@@ -42,6 +42,15 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>adminEdit</servlet-name>
+    <jsp-file>/adminEdit.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>adminEdit</servlet-name>
+    <url-pattern>/adminEdit</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>signUpButton</servlet-name>
     <servlet-class>bsu.tp.financial.controller.ControllerServlet</servlet-class>
     <init-param>

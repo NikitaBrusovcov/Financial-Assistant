@@ -21,7 +21,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SignUpButton implements Command {
-    //private final Logger logger = LoggerFactory.getLogger(SignUpButton.class);
+
+    private final Logger logger = LoggerFactory.getLogger(SignUpButton.class);
 
     ServiceFactory serviceFactory = ServiceFactory.getInstance();
     UserService userService = serviceFactory.getUserService();
@@ -30,29 +31,22 @@ public class SignUpButton implements Command {
 
     @Override
     public CommandName callCommandMethod(HttpServletRequest req) {
-        if (HttpUtils.isMethodGet(req)) {
-            //logger.info("Failed, call method get in signUp page.");
-            //return CommandName.ERROR.getCommand().callCommandMethod(req);
-        }
-        if(!PasswordValidator.validatePassword(req)){
-            //logger.info("Failed signUp, passwords didn't match. (Email: " + req.getParameter("email") + ")");
-            req.setAttribute("wrongInformation", true);
+        if(validation(req)){
             return CommandName.SIGN_UP_BUTTON;
-        }
-        if(userService.findUserByEmail(HttpUtils.checkRequestParameter(req, "email")) != null){
-            throw new CommandException("signUp failed, email was founded" , new RuntimeException());
         }
 
         User user = createUser(req);
         BankAccount rainyDayBankAccount = createRainyDayBankAccount(req);
+
         try {
             user = userService.signUp(user);
-            HttpUtils.updateSession(req, "user", user);
             bankAccountService.createBankAccount(rainyDayBankAccount, user);
+            HttpUtils.updateSession(req, "user", userService.findUserById(user.getId()));
         } catch (RuntimeException exception) {
-            //throw new CommandException("Sign up failed ", exception);
+            throw new CommandException("SignUpButton failed ", exception);
         }
-        //logger.info(user.getEmail() + " sign up");
+
+        logger.info(user.getEmail() + " signUp");
         return CommandName.PROFILE;
     }
 
@@ -69,8 +63,24 @@ public class SignUpButton implements Command {
     private BankAccount createRainyDayBankAccount(HttpServletRequest req) {
         BankAccount rainyDayBankAccount = new BankAccount();
         rainyDayBankAccount.setTitle("rainyDay");
-        rainyDayBankAccount.setCurrency(Currency.valueOf(req.getParameter("currency")));
+        rainyDayBankAccount.setCurrency(Currency.valueOf(HttpUtils.checkRequestParameter(req, "currency")));
         rainyDayBankAccount.setAmountOfMoney(BigDecimal.valueOf(0));
         return rainyDayBankAccount;
+    }
+
+    private boolean validation(HttpServletRequest req){
+        String email = HttpUtils.checkRequestParameter(req, "email");
+        if (HttpUtils.isMethodGet(req)) {
+            logger.info("Failed, call method get in signUpButton.");
+            throw new CommandException("SignUpButton failed, call method get", new RuntimeException());
+        }
+        if(!PasswordValidator.validatePassword(req)){
+            logger.info("Failed signUp, passwords didn't match. (Email: " + email + ")");
+            return true;
+        }
+        if(userService.findUserByEmail(email) != null){
+            throw new CommandException("signUp failed, email already exists" , new RuntimeException());
+        }
+        return false;
     }
 }

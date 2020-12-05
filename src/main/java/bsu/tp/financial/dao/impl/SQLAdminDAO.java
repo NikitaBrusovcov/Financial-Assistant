@@ -15,6 +15,7 @@ public class SQLAdminDAO implements AdminDAO {
     private static final String FIND_ALL_ADMIN = "SELECT * FROM admin ORDER BY email";
     private static final String CREATE_ADMIN = "INSERT INTO admin (email, password) VALUES(?, ?)";
     private static final String UPDATE_ADMIN = "UPDATE admin SET password = ?  WHERE id = ?";
+    private static final String DELETE_ADMIN = "DELETE FROM admin WHERE id = ?";
 
 
     @Override
@@ -95,6 +96,20 @@ public class SQLAdminDAO implements AdminDAO {
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_ADMIN);
             preparedStatement.setString(1, String.valueOf(admin.getPassword()));
             preparedStatement.setInt(2, admin.getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            //Connector.releaseConnection(connection);
+        }
+    }
+
+    @Override
+    public void deleteAdmin(Admin admin) {
+        Connection connection = ConnectionDB.getConnection();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_ADMIN);
+            preparedStatement.setInt(1, admin.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();

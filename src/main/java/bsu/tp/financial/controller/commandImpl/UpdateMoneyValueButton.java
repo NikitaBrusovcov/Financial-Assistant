@@ -5,9 +5,12 @@ import bsu.tp.financial.controller.CommandName;
 import bsu.tp.financial.entity.BankAccount;
 import bsu.tp.financial.entity.Operation;
 import bsu.tp.financial.entity.User;
+import bsu.tp.financial.exception.CommandException;
 import bsu.tp.financial.service.*;
 import bsu.tp.financial.util.BankAccountUtils;
 import bsu.tp.financial.util.HttpUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
@@ -16,7 +19,7 @@ import java.util.Date;
 
 public class UpdateMoneyValueButton implements Command {
 
-    //private final Logger logger = LoggerFactory.getLogger(SignUpButton.class);
+    private final Logger logger = LoggerFactory.getLogger(UpdateMoneyValueButton.class);
 
     ServiceFactory serviceFactory = ServiceFactory.getInstance();
     UserService userService = serviceFactory.getUserService();
@@ -27,47 +30,41 @@ public class UpdateMoneyValueButton implements Command {
     @Override
     public CommandName callCommandMethod(HttpServletRequest req) {
         if (HttpUtils.isMethodGet(req)) {
-            //logger.info("Failed, call method get in signUp page.");
-            //return CommandName.ERROR.getCommand().callCommandMethod(req);
+            logger.info("Failed, call method get in UpdateMoneyValueButton.");
+            throw new CommandException("UpdateMoneyValueButton failed ", new RuntimeException());
         }
 
-        String action = req.getParameter("action");
-        int id = Integer.parseInt(req.getParameter("id"));
-        BigDecimal money = BigDecimal.valueOf(Double.parseDouble(req.getParameter("money")));
-        String description = req.getParameter("description");
+        int id = Integer.parseInt(HttpUtils.checkRequestParameter(req, "id"));
         User user = (User) req.getSession().getAttribute("user");
-
         BankAccount editBankAccount = BankAccountUtils.findBankAccountFromUser(id, user);
-        editBankAccount.setAmountOfMoney(updatedMoneyValue(action, editBankAccount.getAmountOfMoney(), money));
 
-        Operation operation = createNewOperation(description, action, money);
-        //LocalDateTime now = LocalDateTime.now();
+        if (editBankAccount != null){
+            editBankAccount.setAmountOfMoney(updatedMoneyValue(editBankAccount.getAmountOfMoney(), req));
+        } else {
+            throw new CommandException("UpdateMoneyValueButton failed ", new RuntimeException());
+        }
+        Operation operation = createNewOperation(req);
 
         try {
             operationService.createOperation(operation, editBankAccount);
             bankAccountService.updateBankAccount(editBankAccount);
-
         } catch (RuntimeException exception) {
-            //throw new CommandException("Update money value failed ", exception);
+            throw new CommandException("UpdateMoneyValueButton failed ", exception);
         }
-        //logger.info(editBankAccount.getTitle() + " updated money value " + editBankAccount.getAmountOfMoney());
+
+        logger.info(editBankAccount.getTitle() + "(" + editBankAccount.getId() + ") have new operation: " + operation + " \nUpdated money value " + editBankAccount.getAmountOfMoney());
 
         if(req.getParameter("rainyDay") != null && req.getParameter("rainyDay").equals("true")){
             return CommandName.RAINY_DAY;
         }
+
         return CommandName.BANK_ACCOUNTS_BUTTON;
     }
 
-    private BankAccount findBankAccount(int id, User user){
-        for (BankAccount bankAccount : user.getBankAccountList()){
-            if (bankAccount.getId() == id){
-                return bankAccount;
-            }
-        }
-        return null;
-    }
 
-    private BigDecimal updatedMoneyValue(String action, BigDecimal bankAccountValue, BigDecimal changeValue){
+    private BigDecimal updatedMoneyValue(BigDecimal bankAccountValue, HttpServletRequest req){
+        String action = HttpUtils.checkRequestParameter(req, "action");
+        BigDecimal changeValue = BigDecimal.valueOf(Double.parseDouble(HttpUtils.checkRequestParameter(req, "money")));
         if (action.equals("add")){
             return bankAccountValue.add(changeValue);
         }
@@ -79,11 +76,11 @@ public class UpdateMoneyValueButton implements Command {
         return bankAccountValue;
     }
 
-    private Operation createNewOperation(String description, String type, BigDecimal money){
+    private Operation createNewOperation(HttpServletRequest req){
         Operation operation = new Operation();
-        operation.setDescription(description);
-        operation.setType(type);
-        operation.setMoney(money);
+        operation.setDescription(HttpUtils.checkRequestParameter(req, "description"));
+        operation.setType(HttpUtils.checkRequestParameter(req, "action"));
+        operation.setMoney(BigDecimal.valueOf(Double.parseDouble(HttpUtils.checkRequestParameter(req, "money"))));
         operation.setDateTime(LocalDateTime.now());
         return operation;
     }

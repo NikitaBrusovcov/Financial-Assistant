@@ -10,4 +10,5 @@ public interface AdminService {
     public void signUp(Admin admin);
     public Admin findAdminByEmail(String email);
     public void updatePassword(Admin admin);
+    public void deleteAdmin(Admin admin);
 }

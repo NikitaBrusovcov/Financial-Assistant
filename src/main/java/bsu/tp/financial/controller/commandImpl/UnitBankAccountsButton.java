@@ -4,14 +4,17 @@ import bsu.tp.financial.controller.Command;
 import bsu.tp.financial.controller.CommandName;
 import bsu.tp.financial.entity.BankAccount;
 import bsu.tp.financial.entity.User;
+import bsu.tp.financial.exception.CommandException;
 import bsu.tp.financial.service.*;
 import bsu.tp.financial.util.HttpUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 
 public class UnitBankAccountsButton implements Command {
 
-    //private final Logger logger = LoggerFactory.getLogger(SignUpButton.class);
+    private final Logger logger = LoggerFactory.getLogger(UnitBankAccountsButton.class);
 
     ServiceFactory serviceFactory = ServiceFactory.getInstance();
     UserService userService = serviceFactory.getUserService();
@@ -21,10 +24,17 @@ public class UnitBankAccountsButton implements Command {
 
     @Override
     public CommandName callCommandMethod(HttpServletRequest req) {
+        User userSession = (User) req.getSession().getAttribute("user");
         String email = HttpUtils.checkRequestParameter(req, "accountMail");
         int bankAccountId = Integer.parseInt(HttpUtils.checkRequestParameter(req, "bankAccount"));
-        User user = userService.findUserByEmail(email);
-        bankAccountService.createUserBankAccountRelationship(bankAccountId, user.getId());
+        User user;
+        try {
+            user = userService.findUserByEmail(email);
+            bankAccountService.createUserBankAccountRelationship(bankAccountId, user.getId());
+        } catch (RuntimeException exception){
+            throw new CommandException("UnitBankAccountsButton failed ", exception);
+        }
+        logger.info(userSession.getEmail() + "unit bankAccount with id " + bankAccountId + " with " + user.getEmail());
         return CommandName.BANK_ACCOUNTS_BUTTON;
     }
 }
