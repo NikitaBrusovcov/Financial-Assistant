@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class ControllerServlet extends HttpServlet {
-    //private final Logger logger = LoggerFactory.getLogger(ControllerServlet.class);
+    private final Logger logger = LoggerFactory.getLogger(ControllerServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -24,15 +24,13 @@ public class ControllerServlet extends HttpServlet {
     }
 
     public void callCommand(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //CommandProvider commandProvider = new CommandProvider();
-        //Command command = commandProvider.getCommand(commandName.toString());
         CommandName commandName = getCommandName();
         Command command = commandName.getCommand();
         CommandName nextCommand = null;
         try {
             nextCommand = command.callCommandMethod(req);
         } catch (CommandException exception){
-            //logger.error("Failed something in " + commandName.toString(), exception);
+            logger.error("Failed something in " + commandName.toString(), exception);
             resp.sendRedirect(req.getContextPath() + "/error");
             return;
         }
@@ -46,7 +44,6 @@ public class ControllerServlet extends HttpServlet {
 
     private CommandName getCommandName() {
         String commandName = getServletConfig().getInitParameter("command").toUpperCase().replace(" ", "_");
-        //String commandName = req.getParameter(parameter).toUpperCase().replace(" ", "_");
         return CommandName.valueOf(commandName);
     }
 }

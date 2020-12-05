@@ -10,6 +10,7 @@ import bsu.tp.financial.service.SecurityService;
 import bsu.tp.financial.service.ServiceFactory;
 import bsu.tp.financial.service.UserService;
 import bsu.tp.financial.util.HttpUtils;
+import com.google.protobuf.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,7 +44,7 @@ public class SignInButton implements Command {
                 logger.info("Admin: " + email + " signIn.");
                 return CommandName.ADMIN_PROFILE;
             }
-        } catch (RuntimeException exception) {
+        } catch (RuntimeException | ServiceException exception) {
             throw new CommandException("Sign in failed ", exception);
         }
 
@@ -60,7 +61,7 @@ public class SignInButton implements Command {
         return false;
     }
 
-    private boolean signInAdmin(HttpServletRequest req, String email, String password) {
+    private boolean signInAdmin(HttpServletRequest req, String email, String password) throws ServiceException {
         Admin admin = adminService.signIn(email);
         if (admin != null && securityService.equalsPassword(password, admin.getPassword())) {
             HttpUtils.updateSession(req, "admin", admin);

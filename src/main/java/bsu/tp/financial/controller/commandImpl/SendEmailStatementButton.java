@@ -7,6 +7,7 @@ import bsu.tp.financial.entity.User;
 import bsu.tp.financial.exception.CommandException;
 import bsu.tp.financial.service.*;
 import bsu.tp.financial.util.HttpUtils;
+import com.google.protobuf.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,7 +29,7 @@ public class SendEmailStatementButton implements Command {
         try {
             bankAccount = bankAccountService.findBankAccountById(id);
             mailService.sendMail(user.getEmail(), bankAccount);
-        } catch (RuntimeException exception){
+        } catch (ServiceException exception){
             throw new CommandException("SendEmailStatementButton failed",  exception);
         }
 

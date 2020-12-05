@@ -6,6 +6,7 @@ import bsu.tp.financial.entity.Admin;
 import bsu.tp.financial.entity.User;
 import bsu.tp.financial.exception.CommandException;
 import bsu.tp.financial.service.*;
+import com.google.protobuf.ServiceException;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -20,7 +21,7 @@ public class Admins implements Command {
         List<Admin> admins;
         try {
             admins = adminService.findAllAdmins();
-        } catch (RuntimeException exception){
+        } catch (ServiceException exception){
             throw new CommandException("Admins failed ", exception);
         }
         req.setAttribute("admins", admins);

@@ -8,6 +8,7 @@ import bsu.tp.financial.exception.CommandException;
 import bsu.tp.financial.service.*;
 import bsu.tp.financial.util.HttpUtils;
 import bsu.tp.financial.util.PasswordValidator;
+import com.google.protobuf.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -68,7 +69,7 @@ public class ChangePasswordButton implements Command {
             admin.setPassword(password);
             try {
                 adminService.updatePassword(admin);
-            } catch (RuntimeException exception){
+            } catch (ServiceException exception){
                 throw new CommandException("ChangePasswordButton failed", exception);
             }
             return;

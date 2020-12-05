@@ -9,6 +9,7 @@ import bsu.tp.financial.exception.CommandException;
 import bsu.tp.financial.service.*;
 import bsu.tp.financial.util.BankAccountUtils;
 import bsu.tp.financial.util.HttpUtils;
+import com.google.protobuf.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,7 +33,7 @@ public class EditBankAccountButton implements Command {
             BankAccount bankAccount = createBankAccount(req);
             try {
                 bankAccountService.createBankAccount(bankAccount, user);
-            } catch (RuntimeException exception){
+            } catch (ServiceException exception){
                 throw new CommandException("EditBankAccountButton failed ", exception);
             }
             logger.info(user.getEmail() + " create bankAccount " + bankAccount.getTitle() + " (id = " + bankAccount.getId() + ")");
@@ -43,7 +44,7 @@ public class EditBankAccountButton implements Command {
             BankAccount bankAccount = BankAccountUtils.findBankAccountFromUser(id, user);
             try {
                 bankAccountService.deleteBankAccount(bankAccount);
-            } catch (RuntimeException exception){
+            } catch (ServiceException exception){
                 throw new CommandException("EditBankAccountButton failed ", exception);
             }
             logger.info(user.getEmail() + " delete bankAccount " + bankAccount.getTitle() + " (id = " + bankAccount.getId() + ")");
@@ -57,7 +58,7 @@ public class EditBankAccountButton implements Command {
             bankAccount.setTitle(title);
             try {
                 bankAccountService.updateBankAccount(bankAccount);
-            } catch (RuntimeException exception){
+            } catch (ServiceException exception){
                 throw new CommandException("EditBankAccountButton failed ", exception);
             }
             logger.info(user.getEmail() + " edit bankAccount " + bankAccount.getTitle() + " (id = " + bankAccount.getId() + "), old title = " + oldTitle);

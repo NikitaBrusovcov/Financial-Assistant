@@ -9,6 +9,7 @@ import bsu.tp.financial.exception.CommandException;
 import bsu.tp.financial.service.*;
 import bsu.tp.financial.util.BankAccountUtils;
 import bsu.tp.financial.util.HttpUtils;
+import com.google.protobuf.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,9 +47,9 @@ public class UpdateMoneyValueButton implements Command {
         Operation operation = createNewOperation(req);
 
         try {
-            operationService.createOperation(operation, editBankAccount);
             bankAccountService.updateBankAccount(editBankAccount);
-        } catch (RuntimeException exception) {
+            operationService.createOperation(operation, editBankAccount);
+        } catch (ServiceException exception) {
             throw new CommandException("UpdateMoneyValueButton failed ", exception);
         }
 
@@ -71,6 +72,8 @@ public class UpdateMoneyValueButton implements Command {
         if (action.equals("delete")){
             if (bankAccountValue.compareTo(changeValue) > 0){
                 return bankAccountValue.subtract(changeValue);
+            } else {
+                throw new CommandException("UpdateMoneyValueButton failed ", new RuntimeException());
             }
         }
         return bankAccountValue;

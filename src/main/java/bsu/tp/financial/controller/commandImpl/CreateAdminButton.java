@@ -9,6 +9,7 @@ import bsu.tp.financial.exception.CommandException;
 import bsu.tp.financial.service.*;
 import bsu.tp.financial.util.HttpUtils;
 import bsu.tp.financial.util.PasswordValidator;
+import com.google.protobuf.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,7 +29,7 @@ public class CreateAdminButton implements Command {
         Admin admin = createAdmin(req);
         try {
             adminService.signUp(admin);
-        } catch (RuntimeException exception) {
+        } catch (ServiceException exception) {
             throw new CommandException("CreateAdminButton failed ", exception);
         }
         logger.info(admin.getEmail() + " signUp");
@@ -43,19 +44,24 @@ public class CreateAdminButton implements Command {
         return admin;
     }
 
-    private void validation(HttpServletRequest req){
+    private void validation(HttpServletRequest req) {
         if (HttpUtils.isMethodGet(req)) {
             logger.info("Failed, call method get in CreateAdminButton");
             throw new CommandException("CreateAdminButton failed", new RuntimeException());
         }
 
-        if(!PasswordValidator.validatePassword(req)){
+        if (!PasswordValidator.validatePassword(req)) {
             logger.info("Failed CreateAdminButton, passwords didn't match. (Email: " + req.getParameter("email") + ")");
             throw new CommandException("CreateAdminButton failed", new RuntimeException());
         }
 
-        if(adminService.findAdminByEmail(HttpUtils.checkRequestParameter(req, "email")) != null){
-            throw new CommandException("CreateAdminButton failed, email already exists" , new RuntimeException());
+        try {
+            if (adminService.findAdminByEmail(HttpUtils.checkRequestParameter(req, "email")) != null) {
+                throw new CommandException("CreateAdminButton failed, email already exists", new RuntimeException());
+            }
+        } catch (ServiceException exception) {
+            throw new CommandException("CreateAdminButton failed, email already exists", exception);
         }
     }
+
 }

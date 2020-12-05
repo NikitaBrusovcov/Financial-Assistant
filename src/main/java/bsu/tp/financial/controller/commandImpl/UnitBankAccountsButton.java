@@ -7,6 +7,7 @@ import bsu.tp.financial.entity.User;
 import bsu.tp.financial.exception.CommandException;
 import bsu.tp.financial.service.*;
 import bsu.tp.financial.util.HttpUtils;
+import com.google.protobuf.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,7 +32,7 @@ public class UnitBankAccountsButton implements Command {
         try {
             user = userService.findUserByEmail(email);
             bankAccountService.createUserBankAccountRelationship(bankAccountId, user.getId());
-        } catch (RuntimeException exception){
+        } catch (ServiceException exception){
             throw new CommandException("UnitBankAccountsButton failed ", exception);
         }
         logger.info(userSession.getEmail() + "unit bankAccount with id " + bankAccountId + " with " + user.getEmail());

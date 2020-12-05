@@ -2,6 +2,7 @@ package bsu.tp.financial.service.impl;
 
 import bsu.tp.financial.entity.BankAccount;
 import bsu.tp.financial.entity.Operation;
+import bsu.tp.financial.exception.ServiceException;
 import bsu.tp.financial.service.MailService;
 import bsu.tp.financial.service.OperationService;
 import com.sun.mail.smtp.SMTPTransport;
@@ -83,7 +84,7 @@ public class MailServiceImpl implements MailService {
             Message message = createMessage(session, createStatement(bankAccount));
             sendMailWithSMTP(session, message);
         } catch (MessagingException ex) {
-            ex.printStackTrace();
+            throw new ServiceException("MailService failed", ex);
         }
     }
 }

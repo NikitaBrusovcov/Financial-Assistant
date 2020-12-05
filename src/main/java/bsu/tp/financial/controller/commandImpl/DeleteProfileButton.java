@@ -6,6 +6,7 @@ import bsu.tp.financial.entity.Admin;
 import bsu.tp.financial.entity.User;
 import bsu.tp.financial.exception.CommandException;
 import bsu.tp.financial.service.*;
+import com.google.protobuf.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,7 +42,7 @@ public class DeleteProfileButton implements Command {
         if (admin != null){
             try {
                 adminService.deleteAdmin(admin);
-            } catch (RuntimeException exception){
+            } catch (ServiceException exception){
                 throw new CommandException("DeleteProfileButton failed ", exception);
             }
             logger.info(admin.getEmail() + " delete account and signOut");

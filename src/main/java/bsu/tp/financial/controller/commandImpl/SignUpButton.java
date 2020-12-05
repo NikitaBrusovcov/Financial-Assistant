@@ -12,6 +12,7 @@ import bsu.tp.financial.service.ServiceFactory;
 import bsu.tp.financial.service.UserService;
 import bsu.tp.financial.util.HttpUtils;
 import bsu.tp.financial.util.PasswordValidator;
+import com.google.protobuf.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,7 +43,7 @@ public class SignUpButton implements Command {
             user = userService.signUp(user);
             bankAccountService.createBankAccount(rainyDayBankAccount, user);
             HttpUtils.updateSession(req, "user", userService.findUserById(user.getId()));
-        } catch (RuntimeException exception) {
+        } catch (ServiceException exception) {
             throw new CommandException("SignUpButton failed ", exception);
         }
 
