@@ -1,11 +1,16 @@
 package bsu.tp.financial.entity;
 
+import javax.swing.plaf.basic.BasicMenuBarUI;
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
     private int id;
     private String name;
     private String surname;
     private String email;
     private char[] password;
+    private List<BankAccount> bankAccountList;
 
     public User(){
 
@@ -49,5 +54,13 @@ public class User {
 
     public void setPassword(char[] password) {
         this.password = password;
+    }
+
+    public List<BankAccount> getBankAccountList() {
+        return bankAccountList;
+    }
+
+    public void setBankAccountList(List<BankAccount> bankAccountList) {
+        this.bankAccountList = bankAccountList;
     }
 }

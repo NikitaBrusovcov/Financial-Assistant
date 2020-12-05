@@ -1,5 +1,6 @@
 package bsu.tp.financial.controller;
 
+import bsu.tp.financial.exception.CommandException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,7 +29,13 @@ public class ControllerServlet extends HttpServlet {
         CommandName commandName = getCommandName();
         Command command = commandName.getCommand();
         CommandName nextCommand = null;
-        nextCommand = command.callCommandMethod(req);
+        try {
+            nextCommand = command.callCommandMethod(req);
+        } catch (CommandException exception){
+            //logger.error("Failed something in " + commandName.toString(), exception);
+            resp.sendRedirect(req.getContextPath() + "/error");
+            return;
+        }
 
         if (commandName.toString().matches(".+BUTTON")) {
             resp.sendRedirect(req.getContextPath() + nextCommand.getJspAddress());

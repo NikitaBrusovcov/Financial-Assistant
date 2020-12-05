@@ -1,5 +1,6 @@
 package bsu.tp.financial.entity;
 
 public enum Currency {
-    Rubl;
+    Belarusian_ruble,
+    USA_dollar;
 }

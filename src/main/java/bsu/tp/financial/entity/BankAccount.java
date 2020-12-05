@@ -1,12 +1,15 @@
 package bsu.tp.financial.entity;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BankAccount {
     private int id;
     private String title;
     private Currency currency;
     private BigDecimal amountOfMoney;
+    private List<Operation> operations;
 
     public BankAccount() {
     }
@@ -41,5 +44,13 @@ public class BankAccount {
 
     public void setAmountOfMoney(BigDecimal amountOfMoney) {
         this.amountOfMoney = amountOfMoney;
+    }
+
+    public List<Operation> getOperations() {
+        return operations;
+    }
+
+    public void setOperations(List<Operation> operations) {
+        this.operations = operations;
     }
 }
