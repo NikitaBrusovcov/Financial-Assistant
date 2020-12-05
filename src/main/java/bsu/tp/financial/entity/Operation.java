@@ -55,12 +55,6 @@ public class Operation {
 
     @Override
     public String toString() {
-        return "Operation{" +
-                "id=" + id +
-                ", description='" + description + '\'' +
-                ", dateTime=" + dateTime +
-                ", money=" + money +
-                ", type='" + type + '\'' +
-                '}';
+        return description + " " + dateTime + " " + money + " " + type;
     }
 }

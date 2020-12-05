@@ -4,6 +4,9 @@ import bsu.tp.financial.dao.DAOFactory;
 import bsu.tp.financial.dao.UserDAO;
 import bsu.tp.financial.entity.BankAccount;
 import bsu.tp.financial.entity.User;
+import bsu.tp.financial.service.BankAccountService;
+import bsu.tp.financial.service.MailService;
+import bsu.tp.financial.service.impl.MailServiceImpl;
 import bsu.tp.financial.service.impl.SecurityServiceImpl;
 
 public class runner {
@@ -22,10 +25,12 @@ public class runner {
 //                System.out.println(bankAccount.getId() + " " + bankAccount.getTitle() + " " + bankAccount.getCurrency() + " " + bankAccount.getAmountOfMoney());
 //            }
 //        }
-        String password = "111";
-        SecurityServiceImpl securityService = new SecurityServiceImpl();
-        char[] parol = securityService.createPassword(password);
-        System.out.println(parol);
+//        String password = "111";
+//        SecurityServiceImpl securityService = new SecurityServiceImpl();
+//        char[] parol = securityService.createPassword(password);
+//        System.out.println(parol);
 
+//        MailService mailService = new MailServiceImpl();
+//        mailService.sendMail("nikkrein1@gmail.com");
     }
 }

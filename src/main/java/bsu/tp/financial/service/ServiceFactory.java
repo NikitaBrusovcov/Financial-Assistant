@@ -15,6 +15,7 @@ public class ServiceFactory {
     private final AdminService adminServiceImpl = new AdminServiceImpl();
     private final SecurityService securityServiceImpl = new SecurityServiceImpl();
     private final OperationService operationServiceImpl = new OperationServiceImpl();
+    private final MailService mailServiceImpl = new MailServiceImpl();
 
     public static ServiceFactory getInstance(){
         return instance;
@@ -34,5 +35,8 @@ public class ServiceFactory {
     }
     public OperationService getOperationService() {
         return operationServiceImpl;
+    }
+    public MailService getMailService() {
+        return mailServiceImpl;
     }
 }
