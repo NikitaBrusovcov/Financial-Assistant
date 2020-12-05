@@ -128,9 +128,6 @@
     <url-pattern>/error</url-pattern>
   </servlet-mapping>
 
-
-
-
   <servlet>
     <servlet-name>adminUsers</servlet-name>
     <servlet-class>bsu.tp.financial.controller.ControllerServlet</servlet-class>
@@ -142,6 +139,32 @@
   <servlet-mapping>
     <servlet-name>adminUsers</servlet-name>
     <url-pattern>/users</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>admins</servlet-name>
+    <servlet-class>bsu.tp.financial.controller.ControllerServlet</servlet-class>
+    <init-param>
+      <param-name>command</param-name>
+      <param-value>admins</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>admins</servlet-name>
+    <url-pattern>/admins</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>createAdminButton</servlet-name>
+    <servlet-class>bsu.tp.financial.controller.ControllerServlet</servlet-class>
+    <init-param>
+      <param-name>command</param-name>
+      <param-value>create_admin_button</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>createAdminButton</servlet-name>
+    <url-pattern>/createAdminButton</url-pattern>
   </servlet-mapping>
 
   <servlet>
@@ -157,6 +180,32 @@
     <url-pattern>/unitBankAccountsButton</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>sendEmailStatementButton</servlet-name>
+    <servlet-class>bsu.tp.financial.controller.ControllerServlet</servlet-class>
+    <init-param>
+      <param-name>command</param-name>
+      <param-value>send_email_statement_button</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>sendEmailStatementButton</servlet-name>
+    <url-pattern>/sendEmailStatementButton</url-pattern>
+  </servlet-mapping>
+
+
+  <servlet>
+    <servlet-name>deleteUserByAdminButton</servlet-name>
+    <servlet-class>bsu.tp.financial.controller.ControllerServlet</servlet-class>
+    <init-param>
+      <param-name>command</param-name>
+      <param-value>delete_user_by_admin_button</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>deleteUserByAdminButton</servlet-name>
+    <url-pattern>/deleteUserByAdminButton</url-pattern>
+  </servlet-mapping>
 
   <servlet>
     <servlet-name>editProfileButton</servlet-name>

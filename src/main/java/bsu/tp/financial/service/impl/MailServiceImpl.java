@@ -17,15 +17,13 @@ import java.util.Properties;
 
 public class MailServiceImpl implements MailService {
     private static final String SMTP_SERVER = "smtp.gmail.com";
-    private static final String EMAIL_FROM = "slebedevskyu@gmail.com";
+    private static final String EMAIL_FROM = "tprogapr@gmail.com";
     private static final String USERNAME = EMAIL_FROM;
-    private static final String PASSWORD = "lebsashag1";
+    private static final String PASSWORD = "Nikkrein1";
     private final Properties prop = System.getProperties();
 
     private String emailTo;
-    private String emailToCC = EMAIL_FROM;
     private String emailSubject = "Bank account statement";
-    private String emailText = "This is your bank account statement: ";
 
 
     private void setProperties() {
@@ -45,7 +43,7 @@ public class MailServiceImpl implements MailService {
         // to
         msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(emailTo, false));
         // cc
-        msg.setRecipients(Message.RecipientType.CC, InternetAddress.parse(emailToCC, false));
+        msg.setRecipients(Message.RecipientType.CC, InternetAddress.parse(EMAIL_FROM, false));
         // subject
         msg.setSubject(emailSubject);
         // content
@@ -69,6 +67,7 @@ public class MailServiceImpl implements MailService {
     private String createStatement(BankAccount bankAccount) {
         List<Operation> operations = bankAccount.getOperations();
         StringBuilder statement = new StringBuilder();
+        statement.append("Statement of ").append(bankAccount.getTitle()).append("\n\n");
         for (Operation operation : operations) {
             statement.append(operation.toString()).append("\n");
         }

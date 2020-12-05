@@ -33,7 +33,8 @@
                 key="label.bankAccounts"/></a></li>
         <li><a href="${pageContext.request.contextPath}/profile/rainyDay"><fmt:message key="label.rainyDay"/></a>
         </li>
-        <li><a href="${pageContext.request.contextPath}/profile/unitBankAccounts"><fmt:message key="label.unit"/> <fmt:message key="label.bankAccount"/> </a></li>
+        <li><a href="${pageContext.request.contextPath}/profile/unitBankAccounts"><fmt:message key="label.unit"/>
+            <fmt:message key="label.bankAccount"/> </a></li>
         <li><a href="${pageContext.request.contextPath}/profile/edit"><fmt:message key="label.edit"/></a></li>
     </ul>
     <p></p>
@@ -55,7 +56,10 @@
             </tr>
         </c:forEach>
     </table>
-
+    <form action="${pageContext.request.contextPath}/sendEmailStatementButton">
+        <input type="hidden" name="id" value="${requestScope.bankAccount.id}">
+        <button><fmt:message key="label.sendToMail"/></button>
+    </form>
 </div>
 </body>
 <style>

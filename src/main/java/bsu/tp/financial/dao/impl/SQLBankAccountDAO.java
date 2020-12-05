@@ -21,6 +21,7 @@ public class SQLBankAccountDAO implements BankAccountDAO {
     private static final String CREATE_USER_BANK_ACCOUNT_RELATIONSHIP = "INSERT INTO userbankaccount (user_id, bankAccount_id) VALUES (?, ?)";
     private static final String UPDATE_BANK_ACCOUNT = "UPDATE bankaccount SET title = ?, currency = ?, amountOfMoney = ?  WHERE id = ?";
     private static final String DELETE_BANK_ACCOUNT = "DELETE FROM bankaccount WHERE id = ?";
+    private static final String FIND_BANK_ACCOUNT = "SELECT * FROM bankaccount WHERE id = ?";
 
 
     @Override
@@ -108,6 +109,25 @@ public class SQLBankAccountDAO implements BankAccountDAO {
             preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        } finally {
+            //Connector.releaseConnection(connection);
+        }
+    }
+
+    @Override
+    public BankAccount findBankAccountById(int id) {
+        Connection connection = ConnectionDB.getConnection();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(FIND_BANK_ACCOUNT);
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return setBankAccount(resultSet);
+            }
+            return null;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return null;
         } finally {
             //Connector.releaseConnection(connection);
         }

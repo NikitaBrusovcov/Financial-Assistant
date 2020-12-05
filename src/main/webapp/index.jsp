@@ -36,7 +36,7 @@
                                 key="label.signOut"/></a></li>
                     </c:when>
                     <c:when test="${not empty sessionScope.admin}">
-                        <li><a href="${pageContext.request.contextPath}/admin/profile">${sessionScope.admin.email}</a>
+                        <li><a href="${pageContext.request.contextPath}/adminProfile">${sessionScope.admin.email}</a>
                         </li>
                         <li><a href="${pageContext.request.contextPath}/signOutButton"><fmt:message
                                 key="label.signOut"/></a></li>

@@ -52,4 +52,14 @@ public class BankAccountServiceImpl implements BankAccountService {
 //            throw new ServiceException("message", daoException);
 //        }
     }
+
+    @Override
+    public BankAccount findBankAccountById(int id){
+        return bankAccountDAO.findBankAccountById(id);
+//        try {
+//            userDAO.createUserWithExamMark(user);
+//        } catch (DAOException daoException) {
+//            throw new ServiceException("message", daoException);
+//        }
+    }
 }

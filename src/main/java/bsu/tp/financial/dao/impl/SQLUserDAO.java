@@ -2,9 +2,7 @@ package bsu.tp.financial.dao.impl;
 
 import bsu.tp.financial.connection.ConnectionDB;
 import bsu.tp.financial.dao.BankAccountDAO;
-import bsu.tp.financial.dao.DAOFactory;
 import bsu.tp.financial.dao.UserDAO;
-import bsu.tp.financial.entity.BankAccount;
 import bsu.tp.financial.entity.User;
 
 import java.sql.*;

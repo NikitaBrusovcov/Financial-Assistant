@@ -72,9 +72,9 @@
     <ul>
         <li><a href="${pageContext.request.contextPath}/users"><fmt:message
                 key="label.users"/></a></li>
-        <li><a href="${pageContext.request.contextPath}/admin/admins"><fmt:message
+        <li><a href="${pageContext.request.contextPath}/admins"><fmt:message
                 key="label.admin"/></a></li>
-        <li><a href="${pageContext.request.contextPath}/admin/edit"><fmt:message key="label.edit"/></a></li>
+        <li><a href="${pageContext.request.contextPath}/adminEdit"><fmt:message key="label.edit"/></a></li>
     </ul>
 
     <header>

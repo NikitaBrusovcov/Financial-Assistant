@@ -11,4 +11,5 @@ public interface BankAccountDAO {
     public void updateBankAccount(BankAccount bankAccount);
     public void deleteBankAccount(BankAccount bankAccount);
     public void createUserBankAccountRelationship(int bankAccountId, int userId);
+    public BankAccount findBankAccountById(int id);
 }

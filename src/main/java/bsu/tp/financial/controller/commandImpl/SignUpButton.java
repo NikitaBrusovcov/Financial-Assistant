@@ -5,6 +5,7 @@ import bsu.tp.financial.controller.CommandName;
 import bsu.tp.financial.entity.BankAccount;
 import bsu.tp.financial.entity.Currency;
 import bsu.tp.financial.entity.User;
+import bsu.tp.financial.exception.CommandException;
 import bsu.tp.financial.service.BankAccountService;
 import bsu.tp.financial.service.SecurityService;
 import bsu.tp.financial.service.ServiceFactory;
@@ -38,6 +39,10 @@ public class SignUpButton implements Command {
             req.setAttribute("wrongInformation", true);
             return CommandName.SIGN_UP_BUTTON;
         }
+        if(userService.findUserByEmail(HttpUtils.checkRequestParameter(req, "email")) != null){
+            throw new CommandException("signUp failed, email was founded" , new RuntimeException());
+        }
+
         User user = createUser(req);
         BankAccount rainyDayBankAccount = createRainyDayBankAccount(req);
         try {

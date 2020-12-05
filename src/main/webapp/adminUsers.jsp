@@ -64,7 +64,7 @@
     <ul>
         <li><a href="${pageContext.request.contextPath}/"><fmt:message key="label.home"/> </a>
         </li>
-        <li><a href="${pageContext.request.contextPath}/admin/profile">${sessionScope.admin.email}</a></li>
+        <li><a href="${pageContext.request.contextPath}/adminProfile">${sessionScope.admin.email}</a></li>
         <li><a href="${pageContext.request.contextPath}/signOutButton"><fmt:message key="label.signOut"/></a>
         </li>
     </ul>
@@ -72,9 +72,9 @@
     <ul>
         <li><a href="${pageContext.request.contextPath}/users"><fmt:message
                 key="label.users"/></a></li>
-        <li><a href="${pageContext.request.contextPath}/admin/admins"><fmt:message
+        <li><a href="${pageContext.request.contextPath}/admins"><fmt:message
                 key="label.admin"/></a></li>
-        <li><a href="${pageContext.request.contextPath}/admin/edit"><fmt:message key="label.edit"/></a></li>
+        <li><a href="${pageContext.request.contextPath}/adminEdit"><fmt:message key="label.edit"/></a></li>
     </ul>
 
     <table>
@@ -83,8 +83,12 @@
                 <td>${user.name}</td>
                 <td>${user.surname}</td>
                 <td>${user.email}</td>
-                <td><button name="#"><fmt:message key="label.delete"/> <fmt:message key="label.profile"/></button></td>
-                <td><button name="#"><fmt:message key="label.profile"/></button></td>
+                <td>
+                    <form action="${pageContext.request.contextPath}/deleteUserByAdminButton">
+                        <input type="hidden" name="id" value="${user.id}">
+                        <button><fmt:message key="label.delete"/> <fmt:message key="label.profile"/></button>
+                    </form>
+                </td>
             </tr>
         </c:forEach>
     </table>

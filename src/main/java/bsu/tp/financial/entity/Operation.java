@@ -55,6 +55,6 @@ public class Operation {
 
     @Override
     public String toString() {
-        return description + " " + dateTime + " " + money + " " + type;
+        return description + " ||| " + dateTime + " ||| " + money + " ||| " + type;
     }
 }
