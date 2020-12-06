@@ -1,6 +1,7 @@
 package bsu.tp.financial.dao.impl;
 
 import bsu.tp.financial.connection.ConnectionDB;
+import bsu.tp.financial.connectionPool.Connector;
 import bsu.tp.financial.dao.BankAccountDAO;
 import bsu.tp.financial.dao.DAOFactory;
 import bsu.tp.financial.dao.OperationDAO;
@@ -9,12 +10,7 @@ import bsu.tp.financial.entity.Currency;
 import bsu.tp.financial.entity.Operation;
 import bsu.tp.financial.entity.User;
 import bsu.tp.financial.exception.DAOException;
-import bsu.tp.financial.service.OperationService;
-import bsu.tp.financial.service.ServiceFactory;
-import bsu.tp.financial.service.UserService;
 
-import javax.print.StreamPrintServiceFactory;
-import java.awt.image.BandedSampleModel;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +20,7 @@ public class SQLBankAccountDAO implements BankAccountDAO {
 
     //DAOFactory daoFactory = DAOFactory.getInstance();
     //OperationDAO operationDAO = daoFactory.getOperationImpl();
-    OperationDAO operationDAO = new SQLOperationDAO();
+    //OperationDAO operationDAO = new SQLOperationDAO();
 
 //    ServiceFactory serviceFactory = ServiceFactory.getInstance();
 //    OperationService operationService = serviceFactory.getOperationService();
@@ -40,7 +36,8 @@ public class SQLBankAccountDAO implements BankAccountDAO {
     @Override
     public List<BankAccount> findBankAccountsByUserId(int userId) throws DAOException {
         List<BankAccount> userBankAccounts = new ArrayList<>();
-        Connection connection = ConnectionDB.getConnection();
+        Connection connection = Connector.getConnection();
+        //Connection connection = ConnectionDB.getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(FIND_BANK_ACCOUNTS_BY_USER_ID);
             preparedStatement.setInt(1, userId);
@@ -52,15 +49,15 @@ public class SQLBankAccountDAO implements BankAccountDAO {
         } catch (SQLException exception) {
             throw new DAOException("Failed findBankAccountsByUserId", exception);
         } finally {
-            //Connector.releaseConnection(connection);
+            Connector.releaseConnection(connection);
         }
         return userBankAccounts;
-
     }
 
     @Override
     public void createBankAccount(BankAccount bankAccount, User user) throws DAOException {
-        Connection connection = ConnectionDB.getConnection();
+        //Connection connection = ConnectionDB.getConnection();
+        Connection connection = Connector.getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(CREATE_BANK_ACCOUNT, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, bankAccount.getTitle());
@@ -76,13 +73,14 @@ public class SQLBankAccountDAO implements BankAccountDAO {
         } catch (SQLException exception) {
             throw new DAOException("Failed createBankAccount", exception);
         } finally {
-            //Connector.releaseConnection(connection);
+            Connector.releaseConnection(connection);
         }
     }
 
     @Override
     public void createUserBankAccountRelationship(int bankAccountId, int userId) throws DAOException {
-        Connection connection = ConnectionDB.getConnection();
+        //Connection connection = ConnectionDB.getConnection();
+        Connection connection = Connector.getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(CREATE_USER_BANK_ACCOUNT_RELATIONSHIP);
             preparedStatement.setInt(1, userId);
@@ -91,13 +89,14 @@ public class SQLBankAccountDAO implements BankAccountDAO {
         } catch (SQLException exception) {
             throw new DAOException("Failed createUserBankAccountRelationship", exception);
         } finally {
-            //Connector.releaseConnection(connection);
+            Connector.releaseConnection(connection);
         }
     }
 
     @Override
     public void updateBankAccount(BankAccount bankAccount) throws DAOException {
-        Connection connection = ConnectionDB.getConnection();
+        //Connection connection = ConnectionDB.getConnection();
+        Connection connection = Connector.getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_BANK_ACCOUNT);
             preparedStatement.setString(1, bankAccount.getTitle());
@@ -108,13 +107,14 @@ public class SQLBankAccountDAO implements BankAccountDAO {
         } catch (SQLException exception) {
             throw new DAOException("Failed updateBankAccount", exception);
         } finally {
-            //Connector.releaseConnection(connection);
+            Connector.releaseConnection(connection);
         }
     }
 
     @Override
     public void deleteBankAccount(BankAccount bankAccount) throws DAOException {
-        Connection connection = ConnectionDB.getConnection();
+        //Connection connection = ConnectionDB.getConnection();
+        Connection connection = Connector.getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_BANK_ACCOUNT);
             preparedStatement.setInt(1, bankAccount.getId());
@@ -122,13 +122,14 @@ public class SQLBankAccountDAO implements BankAccountDAO {
         } catch (SQLException exception) {
             throw new DAOException("Failed deleteBankAccount", exception);
         } finally {
-            //Connector.releaseConnection(connection);
+            Connector.releaseConnection(connection);
         }
     }
 
     @Override
     public BankAccount findBankAccountById(int id) throws DAOException {
-        Connection connection = ConnectionDB.getConnection();
+        //Connection connection = ConnectionDB.getConnection();
+        Connection connection = Connector.getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(FIND_BANK_ACCOUNT);
             preparedStatement.setInt(1, id);
@@ -140,11 +141,14 @@ public class SQLBankAccountDAO implements BankAccountDAO {
         } catch (SQLException exception) {
             throw new DAOException("Failed findBankAccountById", exception);
         } finally {
-            //Connector.releaseConnection(connection);
+            Connector.releaseConnection(connection);
         }
     }
 
     private BankAccount setBankAccount(ResultSet resultSet) throws DAOException {
+        DAOFactory daoFactory = DAOFactory.getInstance();
+        OperationDAO operationDAO = daoFactory.getOperationImpl();
+
         BankAccount bankAccount;
         try {
             bankAccount = new BankAccount();

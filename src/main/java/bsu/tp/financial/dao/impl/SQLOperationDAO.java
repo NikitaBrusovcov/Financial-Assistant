@@ -1,18 +1,15 @@
 package bsu.tp.financial.dao.impl;
 
 import bsu.tp.financial.connection.ConnectionDB;
+import bsu.tp.financial.connectionPool.Connector;
 import bsu.tp.financial.dao.OperationDAO;
 import bsu.tp.financial.entity.BankAccount;
 import bsu.tp.financial.entity.Operation;
 import bsu.tp.financial.exception.DAOException;
 
 import java.sql.*;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class SQLOperationDAO implements OperationDAO {
@@ -22,7 +19,8 @@ public class SQLOperationDAO implements OperationDAO {
 
     @Override
     public void createOperation(Operation operation, BankAccount bankAccount) throws DAOException {
-        Connection connection = ConnectionDB.getConnection();
+        //Connection connection = ConnectionDB.getConnection();
+        Connection connection = Connector.getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(CREATE_OPERATION);
             preparedStatement.setString(1, operation.getDescription());
@@ -35,13 +33,14 @@ public class SQLOperationDAO implements OperationDAO {
         } catch (SQLException exception) {
             throw new DAOException("Failed createOperation", exception);
         } finally {
-            //Connector.releaseConnection(connection);
+            Connector.releaseConnection(connection);
         }
     }
 
     @Override
     public List<Operation> findOperationsByBankAccountId(int bankAccountId) throws DAOException {
-        Connection connection = ConnectionDB.getConnection();
+        //Connection connection = ConnectionDB.getConnection();
+        Connection connection = Connector.getConnection();
         List<Operation> operations = new ArrayList<>();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(FIND_OPERATION_BY_ID);
@@ -54,7 +53,7 @@ public class SQLOperationDAO implements OperationDAO {
         } catch (SQLException exception) {
             throw new DAOException("Failed findOperationsByBankAccountId", exception);
         } finally {
-            //Connector.releaseConnection(connection);
+            Connector.releaseConnection(connection);
         }
         return operations;
     }
