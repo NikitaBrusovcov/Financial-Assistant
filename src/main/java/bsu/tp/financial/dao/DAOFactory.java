@@ -31,7 +31,7 @@ public class DAOFactory {
     public AdminDAO getAdminDAO(){
         return sqlAdminImpl;
     }
-    public OperationDAO getSqlOperationImpl(){
+    public OperationDAO getOperationImpl(){
         return sqlOperationImpl;
     }
 }

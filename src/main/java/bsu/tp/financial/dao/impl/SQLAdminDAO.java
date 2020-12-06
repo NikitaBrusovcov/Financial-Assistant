@@ -4,6 +4,7 @@ import bsu.tp.financial.connection.ConnectionDB;
 import bsu.tp.financial.dao.AdminDAO;
 import bsu.tp.financial.entity.Admin;
 import bsu.tp.financial.entity.User;
+import bsu.tp.financial.exception.DAOException;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class SQLAdminDAO implements AdminDAO {
 
 
     @Override
-    public Admin findAdminByEmail(String email) {
+    public Admin findAdminByEmail(String email) throws DAOException{
         Connection connection = ConnectionDB.getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(FIND_ADMIN_BY_EMAIL);
@@ -29,18 +30,15 @@ public class SQLAdminDAO implements AdminDAO {
                 return setAdmin(resultSet);
             }
             return null;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-            return null;
-//            catch (SQLException exception) {
-//            throw new DAOException("Field findByEmail", exception);
+        } catch (SQLException exception) {
+            throw new DAOException("Failed findAdminByEmail", exception);
         } finally {
             //Connector.releaseConnection(connection);
         }
     }
 
     @Override
-    public List<Admin> findAllAdmins() {
+    public List<Admin> findAllAdmins() throws DAOException {
         List<Admin> admins = new ArrayList<>();
         Connection connection = ConnectionDB.getConnection();
         try {
@@ -50,16 +48,15 @@ public class SQLAdminDAO implements AdminDAO {
                 admins.add(setAdmin(resultSet));
             }
             return admins;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-            return null;
+        } catch (SQLException exception) {
+            throw new DAOException("Failed findAllAdmins", exception);
         } finally {
             //Connector.releaseConnection(connection);
         }
     }
 
     @Override
-    public void createAdmin(Admin admin){
+    public void createAdmin(Admin admin) throws DAOException {
         Connection connection = ConnectionDB.getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(CREATE_ADMIN);
@@ -67,55 +64,51 @@ public class SQLAdminDAO implements AdminDAO {
             preparedStatement.setString(2, String.valueOf(admin.getPassword()));
             preparedStatement.executeUpdate();
         } catch (SQLException exception) {
-            //throw new DAOException("Field createUser", exception);
+            throw new DAOException("Failed createAdmin", exception);
         } finally {
             //Connector.releaseConnection(connection);
         }
     }
 
-
-    private Admin setAdmin(ResultSet resultSet){
-        try {
-            Admin admin = new Admin();
-            admin.setId(resultSet.getInt("id"));
-            admin.setEmail(resultSet.getString("email"));
-            admin.setPassword(resultSet.getString("password").toCharArray());
-            return admin;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-            return null;
-//            catch (SQLException exception) {
-//            throw new DAOException("Field setAdmin", exception);
-        }
-    }
-
     @Override
-    public void updatePassword(Admin admin) {
+    public void updatePassword(Admin admin) throws DAOException {
         Connection connection = ConnectionDB.getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_ADMIN);
             preparedStatement.setString(1, String.valueOf(admin.getPassword()));
             preparedStatement.setInt(2, admin.getId());
             preparedStatement.executeUpdate();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException exception) {
+            throw new DAOException("Failed updatePassword", exception);
         } finally {
             //Connector.releaseConnection(connection);
         }
     }
 
     @Override
-    public void deleteAdmin(Admin admin) {
+    public void deleteAdmin(Admin admin) throws DAOException {
         Connection connection = ConnectionDB.getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_ADMIN);
             preparedStatement.setInt(1, admin.getId());
             preparedStatement.executeUpdate();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException exception) {
+            throw new DAOException("Failed deleteAdmin", exception);
         } finally {
             //Connector.releaseConnection(connection);
         }
     }
 
+    private Admin setAdmin(ResultSet resultSet) throws DAOException {
+        Admin admin;
+        try {
+            admin = new Admin();
+            admin.setId(resultSet.getInt("id"));
+            admin.setEmail(resultSet.getString("email"));
+            admin.setPassword(resultSet.getString("password").toCharArray());
+            return admin;
+        } catch (SQLException exception) {
+            throw new DAOException("Failed setAdmin", exception);
+        }
+    }
 }

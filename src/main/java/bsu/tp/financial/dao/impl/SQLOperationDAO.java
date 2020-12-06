@@ -4,6 +4,7 @@ import bsu.tp.financial.connection.ConnectionDB;
 import bsu.tp.financial.dao.OperationDAO;
 import bsu.tp.financial.entity.BankAccount;
 import bsu.tp.financial.entity.Operation;
+import bsu.tp.financial.exception.DAOException;
 
 import java.sql.*;
 import java.text.DateFormat;
@@ -20,7 +21,7 @@ public class SQLOperationDAO implements OperationDAO {
     private static final String CREATE_OPERATION = "INSERT INTO operation (description, dateTime, type, money, bankAccount_id) VALUES(?, ?, ?, ?, ?)";
 
     @Override
-    public void createOperation(Operation operation, BankAccount bankAccount) {
+    public void createOperation(Operation operation, BankAccount bankAccount) throws DAOException {
         Connection connection = ConnectionDB.getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(CREATE_OPERATION);
@@ -31,15 +32,15 @@ public class SQLOperationDAO implements OperationDAO {
             preparedStatement.setBigDecimal(4, operation.getMoney());
             preparedStatement.setInt(5, bankAccount.getId());
             preparedStatement.executeUpdate();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException exception) {
+            throw new DAOException("Failed createOperation", exception);
         } finally {
             //Connector.releaseConnection(connection);
         }
     }
 
     @Override
-    public List<Operation> findOperationsByBankAccountId(int bankAccountId) {
+    public List<Operation> findOperationsByBankAccountId(int bankAccountId) throws DAOException {
         Connection connection = ConnectionDB.getConnection();
         List<Operation> operations = new ArrayList<>();
         try {
@@ -50,31 +51,29 @@ public class SQLOperationDAO implements OperationDAO {
                 Operation operation = setOperation(resultSet);
                 operations.add(operation);
             }
-            return operations;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-            return null;
+        } catch (SQLException exception) {
+            throw new DAOException("Failed findOperationsByBankAccountId", exception);
         } finally {
             //Connector.releaseConnection(connection);
         }
+        return operations;
     }
 
-    private Operation setOperation(ResultSet resultSet) throws SQLException {
-
-        Operation operation = new Operation();
-        operation.setId(resultSet.getInt("id"));
-        operation.setDescription(resultSet.getString("description"));
-        Timestamp timestamp = resultSet.getTimestamp("dateTime");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        operation.setDateTime(timestamp.toLocalDateTime());
-        operation.setMoney(resultSet.getBigDecimal("money"));
-        operation.setType(resultSet.getString("type"));
+    private Operation setOperation(ResultSet resultSet) throws DAOException {
+        Operation operation;
+        try {
+            operation = new Operation();
+            operation.setId(resultSet.getInt("id"));
+            operation.setDescription(resultSet.getString("description"));
+            Timestamp timestamp = resultSet.getTimestamp("dateTime");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            operation.setDateTime(timestamp.toLocalDateTime());
+            operation.setMoney(resultSet.getBigDecimal("money"));
+            operation.setType(resultSet.getString("type"));
+        } catch (SQLException exception) {
+            throw new DAOException("Failed setOperation", exception);
+        }
         return operation;
-    }
-
-    private java.sql.Date convert(java.util.Date uDate) {
-        java.sql.Date sDate = new java.sql.Date(uDate.getTime());
-        return sDate;
     }
 
 }

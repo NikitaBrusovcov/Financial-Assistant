@@ -4,6 +4,7 @@ import bsu.tp.financial.connection.ConnectionDB;
 import bsu.tp.financial.dao.BankAccountDAO;
 import bsu.tp.financial.dao.UserDAO;
 import bsu.tp.financial.entity.User;
+import bsu.tp.financial.exception.DAOException;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ public class SQLUserDAO implements UserDAO {
 
 
     @Override
-    public User findUserById(int id) {
+    public User findUserById(int id) throws DAOException {
         Connection connection = ConnectionDB.getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(FIND_USER_BY_ID);
@@ -35,16 +36,15 @@ public class SQLUserDAO implements UserDAO {
                 return setUser(resultSet);
             }
             return null;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-            return null;
+        } catch (SQLException exception) {
+            throw new DAOException("Failed findUserById", exception);
         } finally {
             //Connector.releaseConnection(connection);
         }
     }
 
     @Override
-    public User findUserByEmail(String email) {
+    public User findUserByEmail(String email) throws DAOException {
         Connection connection = ConnectionDB.getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(FIND_USER_BY_EMAIL);
@@ -54,16 +54,15 @@ public class SQLUserDAO implements UserDAO {
                 return setUser(resultSet);
             }
             return null;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-            return null;
+        } catch (SQLException exception) {
+            throw new DAOException("Failed findUserByEmail", exception);
         } finally {
             //Connector.releaseConnection(connection);
         }
     }
 
     @Override
-    public List<User> findAllUsers() {
+    public List<User> findAllUsers() throws DAOException {
         List<User> users = new ArrayList<>();
         Connection connection = ConnectionDB.getConnection();
         try {
@@ -72,17 +71,16 @@ public class SQLUserDAO implements UserDAO {
             while (resultSet.next()) {
                 users.add(setUser(resultSet));
             }
-            return users;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-            return null;
+        } catch (SQLException exception) {
+            throw new DAOException("Failed findAllUsers", exception);
         } finally {
             //Connector.releaseConnection(connection);
         }
+        return users;
     }
 
     @Override
-    public User createUser(User user){
+    public User createUser(User user) throws DAOException {
         Connection connection = ConnectionDB.getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(CREATE_USER, Statement.RETURN_GENERATED_KEYS);
@@ -98,15 +96,14 @@ public class SQLUserDAO implements UserDAO {
             }
             return null;
         } catch (SQLException exception) {
-            //throw new DAOException("Field createUser", exception);
-            return null;
+            throw new DAOException("Failed createUser", exception);
         } finally {
             //Connector.releaseConnection(connection);
         }
     }
 
     @Override
-    public void updateUser(User user) {
+    public void updateUser(User user) throws DAOException {
         Connection connection = ConnectionDB.getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_USER);
@@ -116,37 +113,41 @@ public class SQLUserDAO implements UserDAO {
             preparedStatement.setString(4, String.valueOf(user.getPassword()));
             preparedStatement.setInt(5, user.getId());
             preparedStatement.executeUpdate();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException exception) {
+            throw new DAOException("Failed updateUser", exception);
         } finally {
             //Connector.releaseConnection(connection);
         }
     }
 
     @Override
-    public void deleteUser(User user) {
+    public void deleteUser(User user) throws DAOException {
         Connection connection = ConnectionDB.getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_USER);
             preparedStatement.setInt(1, user.getId());
             preparedStatement.executeUpdate();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException exception) {
+            throw new DAOException("Failed deleteUser", exception);
         } finally {
             //Connector.releaseConnection(connection);
         }
     }
 
 
-    private User setUser(ResultSet resultSet) throws SQLException {
-
-        User user = new User();
-        user.setId(resultSet.getInt("id"));
-        user.setName(resultSet.getString("name"));
-        user.setSurname(resultSet.getString("surname"));
-        user.setEmail(resultSet.getString("email"));
-        user.setPassword(resultSet.getString("password").toCharArray());
-        user.setBankAccountList(bankAccountDAO.findBankAccountsByUserId(user.getId()));
+    private User setUser(ResultSet resultSet) throws DAOException {
+        User user;
+        try {
+            user = new User();
+            user.setId(resultSet.getInt("id"));
+            user.setName(resultSet.getString("name"));
+            user.setSurname(resultSet.getString("surname"));
+            user.setEmail(resultSet.getString("email"));
+            user.setPassword(resultSet.getString("password").toCharArray());
+            user.setBankAccountList(bankAccountDAO.findBankAccountsByUserId(user.getId()));
+        } catch (SQLException exception) {
+            throw new DAOException("Failed setUser", exception);
+        }
         return user;
     }
 }
