@@ -1,1 +1,1 @@
-web: java -war target/Financial_Assistant.war
+web: java -jar target/Financial_Assistant.jar
