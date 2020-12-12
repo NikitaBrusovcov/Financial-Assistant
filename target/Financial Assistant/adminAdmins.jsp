@@ -13,44 +13,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
     <%--    <link rel="stylesheet" href="${pageContext.request.contextPath}/view/assets/css/main.css"/>--%>
     <%--    <style><%@include file="view/assets/css/main.css"%></style>--%>
-    <style>
-        .read-more-state,
-        .read-more-state1 {
-            display: none;
-        }
-
-        .read-more-target,
-        .read-more-target1 {
-            display: none;
-            max-height: 0;
-            font-size: 0;
-            transition: .25s ease;
-        }
-
-        .read-more-state:checked ~ .read-more-wrap .read-more-target {
-            display: block;
-            font-size: inherit;
-            max-height: 999em;
-        }
-
-        .read-more-state1:checked ~ .read-more-wrap1 .read-more-target1 {
-            display: block;
-            font-size: inherit;
-            max-height: 999em;
-        }
-
-        .read-more-trigger,
-        .read-more-trigger1 {
-            cursor: pointer;
-            display: inline-block;
-            padding: 0 .5em;
-            color: #666;
-            font-size: .9em;
-            line-height: 2;
-            border-radius: .25em;
-
-        }
-    </style>
 
 </head>
 <body>

@@ -109,7 +109,7 @@
       <param-name>command</param-name>
       <param-value>update_money_value_button</param-value>
     </init-param>
-  </servlet>1
+  </servlet>
   <servlet-mapping>
     <servlet-name>editBankAccountsMoneyValue</servlet-name>
     <url-pattern>/editBankAccountsMoneyValue</url-pattern>
@@ -252,12 +252,56 @@
     <filter-name>UserSessionFilter</filter-name>
     <url-pattern>/profile/*</url-pattern>
     <url-pattern>/profile.jsp</url-pattern>
+    <url-pattern>/editProfile.jsp</url-pattern>
     <url-pattern>/personalInfo.jsp</url-pattern>
     <url-pattern>/bankAccounts.jsp</url-pattern>
+    <url-pattern>/editBankAccounts.jsp</url-pattern>
     <url-pattern>/rainyDay.jsp</url-pattern>
     <url-pattern>/editProfile.jsp</url-pattern>
     <url-pattern>/statement.jsp</url-pattern>
     <url-pattern>/unitBankAccounts.jsp</url-pattern>
+  </filter-mapping>
+
+  <filter>
+    <filter-name>LoginFilter</filter-name>
+    <filter-class>bsu.tp.financial.filter.LoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>LoginFilter</filter-name>
+    <url-pattern>/signIn</url-pattern>
+    <url-pattern>/signInButton</url-pattern>
+    <url-pattern>/signUpButton</url-pattern>
+    <url-pattern>/signUp</url-pattern>
+    <url-pattern>/signIn.jsp</url-pattern>
+    <url-pattern>/signUp.jsp</url-pattern>
+  </filter-mapping>
+
+  <filter>
+    <filter-name>AdminSessionFilter</filter-name>
+    <filter-class>bsu.tp.financial.filter.AdminSessionFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>AdminSessionFilter</filter-name>
+    <url-pattern>/adminProfile</url-pattern>
+    <url-pattern>/users</url-pattern>
+    <url-pattern>/admins</url-pattern>
+    <url-pattern>/adminEdit</url-pattern>
+    <url-pattern>/adminProfile.jsp</url-pattern>
+    <url-pattern>/adminAdmins.jsp</url-pattern>
+    <url-pattern>/adminEdit.jsp</url-pattern>
+    <url-pattern>/adminUsers.jsp</url-pattern>
+    <url-pattern>/createAdminButton</url-pattern>
+    <url-pattern>/deleteUserByAdminButton</url-pattern>
+  </filter-mapping>
+
+  <filter>
+    <filter-name>SessionFilter</filter-name>
+    <filter-class>bsu.tp.financial.filter.SessionFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>SessionFilter</filter-name>
+    <url-pattern>/editProfileButton</url-pattern>
+    <url-pattern>/deleteProfileButton</url-pattern>
   </filter-mapping>
 
 </web-app>
