@@ -7,7 +7,7 @@
     <groupId>org.example</groupId>
     <artifactId>Financial_Assistant</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>war</packaging>
+<!--    <packaging>war</packaging>-->
 
     <name>Financial Assistant Maven Webapp</name>
     <!-- FIXME change it to the project's website -->
@@ -142,7 +142,6 @@
                     <artifactId>maven-deploy-plugin</artifactId>
                     <version>2.8.2</version>
                 </plugin>
-
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-dependency-plugin</artifactId>
@@ -164,6 +163,10 @@
                             </configuration>
                         </execution>
                     </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
                     <configuration>
                         <source>8</source>
                         <target>8</target>
