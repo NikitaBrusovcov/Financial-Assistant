@@ -25,7 +25,7 @@ public class SQLBankAccountDAO implements BankAccountDAO {
 //    ServiceFactory serviceFactory = ServiceFactory.getInstance();
 //    OperationService operationService = serviceFactory.getOperationService();
 
-    private static final String FIND_BANK_ACCOUNTS_BY_USER_ID = "SELECT bankAccount_id as id, bankaccount.title as title, bankaccount.currency as currency, bankaccount.amountOfMoney as amountOfMoney FROM userbankaccount INNER JOIN bankaccount ON userbankaccount.user_id = ? && userbankaccount.bankAccount_id = bankAccount.id";
+    private static final String FIND_BANK_ACCOUNTS_BY_USER_ID = "SELECT bankAccount_id as id, bankaccount.title as title, bankaccount.currency as currency, bankaccount.amountOfMoney as amountOfMoney FROM userbankaccount INNER JOIN bankaccount ON userbankaccount.user_id = ? && userbankaccount.bankAccount_id = bankaccount.id";
     private static final String CREATE_BANK_ACCOUNT = "INSERT INTO bankaccount (title, currency, amountOfMoney) VALUES(?, ?, ?)";
     private static final String CREATE_USER_BANK_ACCOUNT_RELATIONSHIP = "INSERT INTO userbankaccount (user_id, bankAccount_id) VALUES (?, ?)";
     private static final String UPDATE_BANK_ACCOUNT = "UPDATE bankaccount SET title = ?, currency = ?, amountOfMoney = ?  WHERE id = ?";
