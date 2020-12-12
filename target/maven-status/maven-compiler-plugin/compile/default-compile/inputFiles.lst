@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 D:\Financial Assistant\src\main\java\bsu\tp\financial\dao\impl\SQLUserDAO.java
 D:\Financial Assistant\src\main\java\bsu\tp\financial\connection\ConnectionDB.java
 D:\Financial Assistant\src\main\java\bsu\tp\financial\connectionPool\DataPropertiesForConnection.java
@@ -62,65 +61,3 @@ D:\Financial Assistant\src\main\java\bsu\tp\financial\entity\Admin.java
 D:\Financial Assistant\src\main\java\bsu\tp\financial\filter\EncodingFilter.java
 D:\Financial Assistant\src\main\java\bsu\tp\financial\filter\LanguageFilter.java
 D:\Financial Assistant\src\main\java\bsu\tp\financial\controller\commandImpl\DeleteUserByAdminButton.java
-=======
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/connectionPool/DataPropertiesForConnectFactory.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/connectionPool/Connector.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/controller/commandImpl/Profile.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/exception/DAOException.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/controller/Command.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/entity/User.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/entity/BankAccount.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/controller/commandImpl/SignUpButton.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/service/impl/UserServiceImpl.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/dao/AdminDAO.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/service/impl/AdminServiceImpl.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/util/PasswordValidator.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/service/MailService.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/exception/CommandException.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/util/HttpUtils.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/service/impl/MailServiceImpl.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/service/ServiceFactory.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/entity/Admin.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/controller/commandImpl/DeleteProfileButton.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/controller/commandImpl/CreateAdminButton.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/controller/commandImpl/AdminUsers.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/entity/Operation.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/filter/EncodingFilter.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/connectionPool/DataPropertiesForConnection.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/controller/ControllerServlet.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/dao/BankAccountDAO.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/service/impl/OperationServiceImpl.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/dao/DAOFactory.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/connection/ConnectionDB.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/controller/commandImpl/UpdateMoneyValueButton.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/dao/OperationDAO.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/util/BankAccountUtils.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/controller/commandImpl/SignOutButton.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/service/AdminService.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/connectionPool/ConnectionPool.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/controller/commandImpl/SignInButton.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/filter/UserSessionFilter.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/dao/impl/SQLBankAccountDAO.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/service/SecurityService.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/filter/LanguageFilter.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/dao/impl/SQLUserDAO.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/connectionPool/BasicConnectionPool.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/service/BankAccountService.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/exception/ServiceException.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/controller/commandImpl/Admins.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/dao/impl/SQLOperationDAO.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/controller/commandImpl/ChangePasswordButton.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/dao/UserDAO.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/service/impl/BankAccountServiceImpl.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/controller/commandImpl/EditBankAccountButton.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/controller/commandImpl/DeleteUserByAdminButton.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/controller/CommandName.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/dao/impl/SQLAdminDAO.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/controller/commandImpl/SendEmailStatementButton.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/service/UserService.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/entity/Currency.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/service/OperationService.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/runner.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/service/impl/SecurityServiceImpl.java
-/home/alexander/Projects/Idea/Financial-Assistant/src/main/java/bsu/tp/financial/controller/commandImpl/UnitBankAccountsButton.java
->>>>>>> a1caa1183ffc4468af25e36a19ce0cd442e50206
