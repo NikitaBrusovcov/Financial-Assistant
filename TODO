@@ -1,0 +1,2 @@
+ throw new CommandException("SignUpButton failed ", exception);//TODO bsu.tp.financial.exception.CommandException: signUp failed, email already exists
+// at bsu.tp.financial.controller.commandImpl.SignUpButton.validation(SignUpButton.java:83)

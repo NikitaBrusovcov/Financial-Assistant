@@ -21,6 +21,7 @@ public class Connector {
                     data.getPassword());
         } catch (SQLException e) {
             //logger.error(e.getMessage());
+            e.printStackTrace();
         }
         catch (ClassNotFoundException e) {
             e.printStackTrace();
