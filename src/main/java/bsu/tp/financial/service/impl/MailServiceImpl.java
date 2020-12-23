@@ -48,7 +48,7 @@ public class MailServiceImpl implements MailService {
         // subject
         msg.setSubject(emailSubject);
         // content
-        msg.setText(text);
+        msg.setContent(text, "text/html");
         msg.setSentDate(new Date());
         return msg;
     }
@@ -68,9 +68,9 @@ public class MailServiceImpl implements MailService {
     private String createStatement(BankAccount bankAccount) {
         List<Operation> operations = bankAccount.getOperations();
         StringBuilder statement = new StringBuilder();
-        statement.append("Statement of ").append(bankAccount.getTitle()).append("\n\n");
+        statement.append("Statement of ").append(bankAccount.getTitle()).append("<br><br>");
         for (Operation operation : operations) {
-            statement.append(operation.toString()).append("\n");
+            statement.append(operation.toString()).append("<br>");
         }
         return statement.toString();
     }
