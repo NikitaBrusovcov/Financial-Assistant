@@ -100,26 +100,26 @@
         <div class="row">
             <div class="col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10">
                 <div class="contact-form wow fadeInUp" data-wow-delay="0.7s">
-                    <form id="contact-form" method="post"
-                          action="${pageContext.request.contextPath}/unitBankAccountsButton">
-
-                        <input type="email" class="form-control" name="accountMail"
-                               placeholder="<fmt:message key="label.email"/>" required>
-                        <select class="form-control" required name="bankAccount">
-                            <option value="" disabled selected><fmt:message key="label.bankAccount"/></option>
-                            <c:forEach var="bankAccount" items="${sessionScope.user.bankAccountList}">
-                                <c:if test="${bankAccount.title != 'rainyDay'}">
-                                    <option value="${bankAccount.id}"
-                                            style="color: #0b0b0b">${bankAccount.title}</option>
-                                </c:if>
-                            </c:forEach>
-                        </select>
-                        <input type="submit" class="form-control submit" value=
-                        <fmt:message key="label.unit"/>>
-                    </form>
+                    <h2><fmt:message key="label.unit"/> <fmt:message key="label.bankAccount"/></h2>
                 </div>
-            </div>
+                <form id="contact-form" method="post"
+                      action="${pageContext.request.contextPath}/unitBankAccountsButton">
 
+                    <input type="email" class="form-control" name="accountMail"
+                           placeholder="<fmt:message key="label.email"/>" required>
+                    <select class="form-control" required name="bankAccount">
+                        <option value="" disabled selected><fmt:message key="label.bankAccount"/></option>
+                        <c:forEach var="bankAccount" items="${sessionScope.user.bankAccountList}">
+                            <c:if test="${bankAccount.title != 'rainyDay'}">
+                                <option value="${bankAccount.id}"
+                                        style="color: #0b0b0b">${bankAccount.title}</option>
+                            </c:if>
+                        </c:forEach>
+                    </select>
+                    <input type="submit" class="form-control submit" value=
+                    <fmt:message key="label.unit"/>>
+                </form>
+            </div>
         </div>
     </div>
 </section>
