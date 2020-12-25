@@ -161,7 +161,7 @@
 
             <div class="col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10">
                 <div class="wow fadeInUp section-title" data-wow-delay="0.6s">
-                    <h2><fmt:message key="label.newPassword"/></h2>
+                    <h2><fmt:message key="label.newBankAccount"/></h2>
                 </div>
             </div>
 
