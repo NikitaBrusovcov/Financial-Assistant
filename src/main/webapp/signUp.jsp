@@ -8,80 +8,124 @@
 
 <html>
 <head>
-    <title><fmt:message key="label.signUp"/></title>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
-    <%--    <link rel="stylesheet" href="view/assets/css/main.css"/>--%>
-    <%--    <style><%@include file="view/assets/css/main.css"%></style>--%>
-
     <!-- Start of HubSpot Embed Code -->
     <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/8927045.js"></script>
     <!-- End of HubSpot Embed Code -->
+
+    <title><fmt:message key="label.signUp"/></title>
+    <meta charset="utf-8"/>
+
+
+    <!--
+
+    Tooplate 2083 Steak House
+
+    https://www.tooplate.com/view/2083-steak-house
+
+    -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <!-- stylesheets css -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/view/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/view/css/magnific-popup.css">
+
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/view/css/animate.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/view/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/view/css/nivo-lightbox.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/view/css/nivo_themes/default/default.css">
+
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/view/css/hover-min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/view/css/flexslider.css">
+
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/view/css/style.css">
+
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600' rel='stylesheet' type='text/css'>
 </head>
 <body>
-<div>
+<div class="navbar navbar-default navbar-static-top" role="navigation">
+    <div class="container">
 
-    <h6><a href="${pageContext.request.contextPath}/languageButton?language=ru">ru</a>
-        <a>|</a>
-        <a href="${pageContext.request.contextPath}/languageButton?language=en">en</a>
-        <a>|</a>
-        <a href="${pageContext.request.contextPath}/languageButton?language=by">by</a></h6>
-    <h1><a href="${pageContext.request.contextPath}/">Financial assistant</a></h1>
-
-    <ul>
-        <li><a href="${pageContext.request.contextPath}/"><fmt:message key="label.home"/> </a>
-        </li>
-        <li><a href="${pageContext.request.contextPath}/signIn"><fmt:message key="label.signIn"/></a></li>
-        <li class="current"><a href="${pageContext.request.contextPath}/signUp"><fmt:message
-                key="label.signUp"/></a></li>
-
-    </ul>
-
-    <form method="post" action="${pageContext.request.contextPath}/signUpButton">
-        <section>
-            <header>
-                <h2><fmt:message key="label.signUp"/></h2>
-            </header>
-            <div>
-                <label>
-                    <input type="text" required placeholder="<fmt:message key="label.surname"/>"
-                           name="surname">
-                </label>
-                <label>
-                    <input type="text" required placeholder="<fmt:message key="label.name"/>"
-                           name="name">
-                </label>
-                <label>
-                    <input type="email" required placeholder="<fmt:message key="label.email"/>"
-                           name="email">
-                </label>
-                <label>
-                    <input type="password" required placeholder="<fmt:message key="label.password"/>"
-                           name="password" minlength="6">
-                </label>
-                <label>
-                    <input type="password" required
-                           placeholder="<fmt:message key="label.repeatPassword"/>" name="repeatPassword"
-                           minlength="6">
-                </label>
-
-                <label>
-                    <select required name="currency">
-                        <option value="" disabled selected><fmt:message key="label.currency" /> <fmt:message key="label.rainyDay"/> </option>
-                        <c:set var="currencies" value="<%=Currency.values()%>" />
-                        <c:forEach var="currency" items="${currencies}">
-                            <option value="${currency}"><fmt:message key="label.${currency}"/></option>
-                        </c:forEach>
-                    </select>
-                </label>
-
-                <button>
-                    <fmt:message key="label.signUpButton"/>
-                </button>
-
-            </div>
-        </section>
-    </form>
+        <div class="navbar-header">
+            <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon icon-bar"></span>
+                <span class="icon icon-bar"></span>
+                <span class="icon icon-bar"></span>
+            </button>
+            <a href="${pageContext.request.contextPath}/languageButton?language=ru" class="navbar-brand">ru</a>
+            <a class="navbar-brand">|</a>
+            <a href="${pageContext.request.contextPath}/languageButton?language=en" class="navbar-brand">en</a>
+            <a class="navbar-brand">|</a>
+            <a href="${pageContext.request.contextPath}/languageButton?language=by" class="navbar-brand">by</a>
+            <p></p>
+            <a href="${pageContext.request.contextPath}/" class="navbar-brand">Financial assistant</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="${pageContext.request.contextPath}/"><fmt:message key="label.home"/> </a></li>
+                <li><a href="${pageContext.request.contextPath}/signIn"><fmt:message key="label.signIn"/></a></li>
+                <li><a href="${pageContext.request.contextPath}/signUp"><fmt:message key="label.signUp"/></a></li>
+            </ul>
+        </div>
+    </div>
 </div>
+
+<section id="contact" class="parallax-section">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+
+
+            <div class="col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10">
+                <div class="contact-form wow fadeInUp" data-wow-delay="0.7s">
+                    <form id="contact-form" method="post" action="${pageContext.request.contextPath}/signUpButton">
+
+                        <input type="text" class="form-control" required
+                               placeholder="<fmt:message key="label.surname"/>" name="surname">
+                        <input type="text" class="form-control" required placeholder="<fmt:message key="label.name"/>"
+                               name="name">
+                        <input type="email" class="form-control" required placeholder="<fmt:message key="label.email"/>"
+                               name="email">
+                        <input type="password" class="form-control" required
+                               placeholder="<fmt:message key="label.password"/>" name="password" minlength="6">
+                        <input type="password" class="form-control" required
+                               placeholder="<fmt:message key="label.repeatPassword"/>" name="repeatPassword"
+                               minlength="6">
+                        <select class="form-control" required name="currency">
+                            <option value="" disabled selected><fmt:message key="label.currency"/> <fmt:message
+                                    key="label.rainyDay"/></option>
+                            <c:set var="currencies" value="<%=Currency.values()%>"/>
+                            <c:forEach var="currency" items="${currencies}">
+                                <option value="${currency}" style="color: #0b0b0b"><fmt:message key="label.${currency}"/></option>
+                            </c:forEach>
+                        </select>
+                        <input type="submit" class="form-control submit" value=
+                        <fmt:message key="label.signUpButton"/>>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Copyright section -->
+<section id="copyright">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-8 col-sm-8 col-xs-8">
+                <p>Copyright © 2020 RFCT TEAM (KREIN, LEBEDEVSKIY, PYSTUNNIK) - <a rel="nofollow" class="designed-by" href="https://github.com/NikitaKrein/Financial-Assistant">Github</a></p>
+            </div>
+        </div>
+    </div>
+</section>
+
 </body>
 </html>
