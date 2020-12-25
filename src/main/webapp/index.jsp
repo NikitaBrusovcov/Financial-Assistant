@@ -11,6 +11,10 @@
     <title><fmt:message key="label.financialAssistant"/></title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+
+    <!-- Start of HubSpot Embed Code -->
+    <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/8927045.js"></script>
+    <!-- End of HubSpot Embed Code -->
 </head>
 
 <body>

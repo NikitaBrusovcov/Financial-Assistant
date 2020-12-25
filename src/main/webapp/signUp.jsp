@@ -13,6 +13,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
     <%--    <link rel="stylesheet" href="view/assets/css/main.css"/>--%>
     <%--    <style><%@include file="view/assets/css/main.css"%></style>--%>
+
+    <!-- Start of HubSpot Embed Code -->
+    <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/8927045.js"></script>
+    <!-- End of HubSpot Embed Code -->
 </head>
 <body>
 <div>
