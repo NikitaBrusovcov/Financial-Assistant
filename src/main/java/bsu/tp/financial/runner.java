@@ -29,13 +29,13 @@ public class runner {
 //                System.out.println(bankAccount.getId() + " " + bankAccount.getTitle() + " " + bankAccount.getCurrency() + " " + bankAccount.getAmountOfMoney());
 //            }
 //        }
-//        String password = "111";
-//        SecurityServiceImpl securityService = new SecurityServiceImpl();
-//        char[] parol = securityService.createPassword(password);
-//        System.out.println(parol);
+        String password = "111";
+        SecurityServiceImpl securityService = new SecurityServiceImpl();
+        char[] parol = securityService.createPassword(password);
+        System.out.println(parol);
 
-        BankAccountDAO bankAccountService = daoFactory.getBankAccountDAO();
-        MailService mailService = new MailServiceImpl();
-        mailService.sendMail("nikkrein1@gmail.com", bankAccountService.findBankAccountById(15));
+//        BankAccountDAO bankAccountService = daoFactory.getBankAccountDAO();
+//        MailService mailService = new MailServiceImpl();
+//        mailService.sendMail("nikkrein1@gmail.com", bankAccountService.findBankAccountById(15));
     }
 }
