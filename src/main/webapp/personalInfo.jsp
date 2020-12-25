@@ -32,7 +32,7 @@
     <h1><a href="${pageContext.request.contextPath}/">Financial assistant</a></h1>
 
     <ul>
-        <li><a href="${pageContext.request.contextPath}/"><fmt:message key="label.personalInfo"/> </a>
+        <li><a href="${pageContext.request.contextPath}/"><fmt:message key="label.home"/> </a>
         </li>
         <li class="current"><a href="${pageContext.request.contextPath}/profile">${sessionScope.user.name}</a></li>
         <li><a href="${pageContext.request.contextPath}/signOutButton"><fmt:message key="label.signOut"/></a></li>
