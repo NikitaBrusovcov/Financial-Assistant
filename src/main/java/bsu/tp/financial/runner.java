@@ -15,6 +15,7 @@ import bsu.tp.financial.service.impl.SecurityServiceImpl;
 public class runner {
     public static void main(String[] args) {
         DAOFactory daoFactory = DAOFactory.getInstance();
+        //test;
 //        UserDAO userDAO = daoFactory.getUserDAO();
 //        User user = userDAO.findUserById(1);
 //        System.out.println(user.getId());
