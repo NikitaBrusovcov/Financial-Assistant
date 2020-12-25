@@ -84,33 +84,34 @@
 
             <div class="col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10">
                 <div class="contact-form wow fadeInUp" data-wow-delay="0.7s">
-                    <form id="contact-form" method="post" action="${pageContext.request.contextPath}/signUpButton">
-
-                        <input type="text" class="form-control" required
-                               placeholder="<fmt:message key="label.surname"/>" name="surname">
-                        <input type="text" class="form-control" required placeholder="<fmt:message key="label.name"/>"
-                               name="name">
-                        <input type="email" class="form-control" required placeholder="<fmt:message key="label.email"/>"
-                               name="email">
-                        <input type="password" class="form-control" required
-                               placeholder="<fmt:message key="label.password"/>" name="password" minlength="6">
-                        <input type="password" class="form-control" required
-                               placeholder="<fmt:message key="label.repeatPassword"/>" name="repeatPassword"
-                               minlength="6">
-                        <select class="form-control" required name="currency">
-                            <option value="" disabled selected><fmt:message key="label.currency"/> <fmt:message
-                                    key="label.rainyDay"/></option>
-                            <c:set var="currencies" value="<%=Currency.values()%>"/>
-                            <c:forEach var="currency" items="${currencies}">
-                                <option value="${currency}" style="color: #0b0b0b"><fmt:message key="label.${currency}"/></option>
-                            </c:forEach>
-                        </select>
-                        <input type="submit" class="form-control submit" value=
-                        <fmt:message key="label.signUpButton"/>>
-                    </form>
+                    <h2><fmt:message key="label.signUp"/></h2>
                 </div>
-            </div>
+                <form id="contact-form" method="post" action="${pageContext.request.contextPath}/signUpButton">
 
+                    <input type="text" class="form-control" required
+                           placeholder="<fmt:message key="label.surname"/>" name="surname">
+                    <input type="text" class="form-control" required placeholder="<fmt:message key="label.name"/>"
+                           name="name">
+                    <input type="email" class="form-control" required placeholder="<fmt:message key="label.email"/>"
+                           name="email">
+                    <input type="password" class="form-control" required
+                           placeholder="<fmt:message key="label.password"/>" name="password" minlength="6">
+                    <input type="password" class="form-control" required
+                           placeholder="<fmt:message key="label.repeatPassword"/>" name="repeatPassword"
+                           minlength="6">
+                    <select class="form-control" required name="currency">
+                        <option value="" disabled selected><fmt:message key="label.currency"/> <fmt:message
+                                key="label.rainyDay"/></option>
+                        <c:set var="currencies" value="<%=Currency.values()%>"/>
+                        <c:forEach var="currency" items="${currencies}">
+                            <option value="${currency}" style="color: #0b0b0b"><fmt:message
+                                    key="label.${currency}"/></option>
+                        </c:forEach>
+                    </select>
+                    <input type="submit" class="form-control submit" value=
+                    <fmt:message key="label.signUpButton"/>>
+                </form>
+            </div>
         </div>
     </div>
 </section>
@@ -121,7 +122,9 @@
         <div class="row">
 
             <div class="col-md-8 col-sm-8 col-xs-8">
-                <p>Copyright © 2020 RFCT TEAM (KREIN, LEBEDEVSKIY, PYSTUNNIK) - <a rel="nofollow" class="designed-by" href="https://github.com/NikitaKrein/Financial-Assistant">Github</a></p>
+                <p>Copyright © 2020 RFCT TEAM (KREIN, LEBEDEVSKIY, PYSTUNNIK) - <a rel="nofollow" class="designed-by"
+                                                                                   href="https://github.com/NikitaKrein/Financial-Assistant">Github</a>
+                </p>
             </div>
         </div>
     </div>

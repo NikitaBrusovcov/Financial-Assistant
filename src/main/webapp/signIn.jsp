@@ -77,7 +77,6 @@
 </div>
 
 
-
 <section id="contact" class="parallax-section">
     <div class="overlay"></div>
     <div class="container">
@@ -86,15 +85,19 @@
 
             <div class="col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10">
                 <div class="contact-form wow fadeInUp" data-wow-delay="0.7s">
-                    <form id="contact-form" method="post" action="${pageContext.request.contextPath}/signInButton">
-                        <input type="email" name="email" class="form-control" required placeholder="<fmt:message key="label.email"/>">
-                        <input type="password" name="password" class="form-control" required placeholder="<fmt:message key="label.password"/>">
-                        <input type="submit" class="form-control submit" value=<fmt:message key="label.signInButton"/> >
-                    </form>
+                    <h2><fmt:message key="label.signIn"/></h2>
                 </div>
+                <form id="contact-form" method="post" action="${pageContext.request.contextPath}/signInButton">
+                    <input type="email" name="email" class="form-control" required
+                           placeholder="<fmt:message key="label.email"/>">
+                    <input type="password" name="password" class="form-control" required
+                           placeholder="<fmt:message key="label.password"/>">
+                    <input type="submit" class="form-control submit" value=
+                    <fmt:message key="label.signInButton"/>>
+                </form>
             </div>
-
         </div>
+
     </div>
 </section>
 
@@ -105,7 +108,9 @@
         <div class="row">
 
             <div class="col-md-8 col-sm-8 col-xs-8">
-                <p>Copyright © 2020 RFCT TEAM (KREIN, LEBEDEVSKIY, PYSTUNNIK) - <a rel="nofollow" class="designed-by" href="https://github.com/NikitaKrein/Financial-Assistant">Github</a></p>
+                <p>Copyright © 2020 RFCT TEAM (KREIN, LEBEDEVSKIY, PYSTUNNIK) - <a rel="nofollow" class="designed-by"
+                                                                                   href="https://github.com/NikitaKrein/Financial-Assistant">Github</a>
+                </p>
             </div>
         </div>
     </div>
