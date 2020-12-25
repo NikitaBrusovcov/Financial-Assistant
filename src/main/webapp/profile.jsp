@@ -85,7 +85,7 @@
                 </li>
                 <li><a href="${pageContext.request.contextPath}/profile/unitBankAccounts"><fmt:message
                         key="label.unit"/> <fmt:message key="label.bankAccount"/> </a></li>
-                <li><a href="${pageContext.request.contextPath}/profile/edit"><fmt:message key="label.edit"/></a></li>
+                <li><a href="${pageContext.request.contextPath}/profile/edit"><fmt:message key="label.updatePassword"/></a></li>
             </ul>
         </div>
     </div>
