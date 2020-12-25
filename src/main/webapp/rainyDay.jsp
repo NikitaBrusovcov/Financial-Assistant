@@ -131,7 +131,7 @@
                                 <button class="btn-success" name="action" value="add"><fmt:message
                                         key="label.add"/></button>
                                 <button class="btn-danger" name="action" value="delete"><fmt:message
-                                        key="label.delete"/></button>
+                                        key="label.withdraw"/></button>
                             </form>
                         </div>
                     </div>
