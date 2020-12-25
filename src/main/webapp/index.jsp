@@ -18,7 +18,7 @@
     <h6><a href="${pageContext.request.contextPath}/languageButton?language=ru">ru</a>
         <a>|</a>
         <a href="${pageContext.request.contextPath}/languageButton?language=en">en</a></h6>
-    <h1><a href="${pageContext.request.contextPath}/">Русский Текст</a></h1>
+    <h1><a href="${pageContext.request.contextPath}/">Русский Дух</a></h1>
 
     <ul>
         <li class="current"><a href="${pageContext.request.contextPath}/"><fmt:message key="label.home"/> </a>
