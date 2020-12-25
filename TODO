@@ -1,2 +1,18 @@
  throw new CommandException("SignUpButton failed ", exception);//TODO bsu.tp.financial.exception.CommandException: signUp failed, email already exists
 // at bsu.tp.financial.controller.commandImpl.SignUpButton.validation(SignUpButton.java:83)
+
+Rename buttons
+
+Replace SignUp RainyDay account currency button
+
+Add to .gitignore # to jar and war  --
+
+Edit label personalInfo /personalInfo.jsp
+
+Typo in bel. lang  пошта --
+
+Remove TODO --
+
+Remove comment from pom.xml
+
+
