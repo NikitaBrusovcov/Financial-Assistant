@@ -20,6 +20,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SignUpButton implements Command {
 
@@ -83,5 +85,13 @@ public class SignUpButton implements Command {
             throw new CommandException("signUp failed, email already exists" , new RuntimeException());
         }
         return false;
+    }
+
+    private String validateEmail(String email){
+        Pattern emailPattern = Pattern.compile(".+@{1}.+\\.{1}.+");
+        Matcher matcher = emailPattern.matcher(email);
+        if(!matcher.find())
+            throw new CommandException("signUp failed, email is incorrect", new RuntimeException());
+        return email;
     }
 }

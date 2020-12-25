@@ -10,7 +10,6 @@
     <packaging>war</packaging>
 
     <name>Financial Assistant Maven Webapp</name>
-    <!-- FIXME change it to the project's website -->
     <url>https://financial-assistant-rfct.herokuapp.com/</url>
 
     <properties>
@@ -102,11 +101,6 @@
             <version>1.1.1</version>
         </dependency>
 
-        <!--        <dependency>-->
-        <!--            <groupId>org.quartz-scheduler</groupId>-->
-        <!--            <artifactId>quartz</artifactId>-->
-        <!--            <version>2.3.0</version>-->
-        <!--        </dependency>-->
     </dependencies>
 
     <build>
@@ -122,10 +116,6 @@
                     <artifactId>maven-resources-plugin</artifactId>
                     <version>3.0.2</version>
                 </plugin>
-                <!--                <plugin>-->
-                <!--                    <artifactId>maven-compiler-plugin</artifactId>-->
-                <!--                    <version>3.8.0</version>-->
-                <!--                </plugin>-->
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>2.22.1</version>
