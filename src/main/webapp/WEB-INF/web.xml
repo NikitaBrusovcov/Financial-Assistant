@@ -6,6 +6,15 @@
   <display-name>Archetype Created Web Application</display-name>
 
   <servlet>
+    <servlet-name>test</servlet-name>
+    <jsp-file>/test.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>test</servlet-name>
+    <url-pattern>/test</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>signIn</servlet-name>
     <jsp-file>/signIn.jsp</jsp-file>
   </servlet>
