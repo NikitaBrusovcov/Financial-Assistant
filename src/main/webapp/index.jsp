@@ -4,13 +4,27 @@
 
 <fmt:setLocale value="${cookie['language'].value}"/>
 <fmt:setBundle basename="language"/>
-
-
 <html>
 <head>
+
+    <!-- Start of HubSpot Embed Code -->
+    <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/8927045.js"></script>
+    <!-- End of HubSpot Embed Code -->
     <title><fmt:message key="label.financialAssistant"/></title>
     <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+
+    <!--
+
+    Tooplate 2083 Steak House
+
+    https://www.tooplate.com/view/2083-steak-house
+
+    -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
 
     <!-- stylesheets css -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/view/css/bootstrap.min.css">
@@ -26,58 +40,85 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/view/css/hover-min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/view/css/flexslider.css">
 
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/view/css/style.css">
 
     <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600' rel='stylesheet' type='text/css'>
 
-
-    <!-- Start of HubSpot Embed Code -->
-    <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/8927045.js"></script>
-    <!-- End of HubSpot Embed Code -->
-    <style>
-        a {
-            text-decoration: none; /* Отменяем подчеркивание у ссылки */
-        }
-    </style>
 </head>
+<body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
 
-<body>
-<div>
-    <div class="collapse navbar-collapse">
-        <ul class="nav navbar-nav navbar-right">
-            <h6><a href="${pageContext.request.contextPath}/languageButton?language=ru">ru</a>
-                <a>|</a>
-                <a href="${pageContext.request.contextPath}/languageButton?language=en">en</a>
-                <a>|</a>
-                <a href="${pageContext.request.contextPath}/languageButton?language=by">by</a></h6>
-            <h1><a href="${pageContext.request.contextPath}/">Financial assistant</a></h1>
-        </ul>
+<!-- Navigation section -->
+<div class="navbar navbar-default navbar-static-top" role="navigation">
+    <div class="container">
+
+        <div class="navbar-header">
+            <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon icon-bar"></span>
+                <span class="icon icon-bar"></span>
+                <span class="icon icon-bar"></span>
+            </button>
+            <a href="${pageContext.request.contextPath}/languageButton?language=ru" class="navbar-brand">ru</a>
+            <a class="navbar-brand">|</a>
+            <a href="${pageContext.request.contextPath}/languageButton?language=en" class="navbar-brand">en</a>
+            <a class="navbar-brand">|</a>
+            <a href="${pageContext.request.contextPath}/languageButton?language=by" class="navbar-brand">by</a>
+            <p></p>
+            <a href="${pageContext.request.contextPath}/" class="navbar-brand">Financial assistant</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="${pageContext.request.contextPath}/"><fmt:message key="label.home"/> </a> </li>
+                <c:choose>
+                    <c:when test="${not empty sessionScope.user}">
+                        <li><a href="${pageContext.request.contextPath}/profile">${sessionScope.user.name}</a></li>
+                        <li><a href="${pageContext.request.contextPath}/signOutButton"><fmt:message
+                                key="label.signOut"/></a></li>
+                    </c:when>
+                    <c:when test="${not empty sessionScope.admin}">
+                        <li><a href="${pageContext.request.contextPath}/adminProfile">${sessionScope.admin.email}</a>
+                        </li>
+                        <li><a href="${pageContext.request.contextPath}/signOutButton"><fmt:message
+                                key="label.signOut"/></a></li>
+                    </c:when>
+                    <c:otherwise>
+                        <li><a href="${pageContext.request.contextPath}/signIn"><fmt:message key="label.signIn"/></a>
+                        </li>
+                        <li><a href="${pageContext.request.contextPath}/signUp"><fmt:message key="label.signUp"/></a>
+                        </li>
+                    </c:otherwise>
+                </c:choose>
+            </ul>
+        </div>
+
     </div>
-    <ul>
-        <li class="current"><a href="${pageContext.request.contextPath}/"><fmt:message key="label.home"/> </a>
-        </li>
-        </li>
-        <c:choose>
-            <c:when test="${not empty sessionScope.user}">
-                <li><a href="${pageContext.request.contextPath}/profile">${sessionScope.user.name}</a></li>
-                <li><a href="${pageContext.request.contextPath}/signOutButton"><fmt:message
-                        key="label.signOut"/></a></li>
-            </c:when>
-            <c:when test="${not empty sessionScope.admin}">
-                <li><a href="${pageContext.request.contextPath}/adminProfile">${sessionScope.admin.email}</a>
-                </li>
-                <li><a href="${pageContext.request.contextPath}/signOutButton"><fmt:message
-                        key="label.signOut"/></a></li>
-            </c:when>
-            <c:otherwise>
-                <li><a href="${pageContext.request.contextPath}/signIn"><fmt:message key="label.signIn"/></a>
-                </li>
-                <li><a href="${pageContext.request.contextPath}/signUp"><fmt:message key="label.signUp"/></a>
-                </li>
-            </c:otherwise>
-        </c:choose>
-    </ul>
 </div>
+
+
+<!-- Feature section -->
+<section id="feature" class="parallax-section">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10">
+                <div class="wow fadeInUp section-title" data-wow-delay="0.6s">
+                    <h2>Жизнь — игра, а деньги — способ вести счет.</h2>
+                    <h4>Тед Тёрнер</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Copyright section -->
+<section id="copyright">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-8 col-sm-8 col-xs-8">
+                <p>Copyright © 2020 RFCT TEAM (KREIN, LEBEDEVSKIY, PYSTUNNIK) - <a rel="nofollow" class="designed-by" href="https://github.com/NikitaKrein/Financial-Assistant">Github</a></p>
+            </div>
+        </div>
+    </div>
+</section>
 </body>
 </html>
