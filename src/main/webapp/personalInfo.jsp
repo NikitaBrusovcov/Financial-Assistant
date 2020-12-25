@@ -76,7 +76,7 @@
                 <li class="current"><a href="${pageContext.request.contextPath}/profile">${sessionScope.user.name}</a></li>
                 <li><a href="${pageContext.request.contextPath}/signOutButton"><fmt:message key="label.signOut"/></a></li>
             </ul>
-            <ul>
+            <ul class="nav navbar-nav navbar-right">
                 <li><a href="${pageContext.request.contextPath}/profile/personalInfo"><fmt:message
                         key="label.personalInfo"/> </a></li>
                 <li><a href="${pageContext.request.contextPath}/profile/bankAccounts"><fmt:message
