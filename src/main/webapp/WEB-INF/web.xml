@@ -125,7 +125,7 @@
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>editBankAccount</servlet-name>
+    <servlet-name>editBankAccountButton</servlet-name>
     <servlet-class>bsu.tp.financial.controller.ControllerServlet</servlet-class>
     <init-param>
       <param-name>command</param-name>
@@ -133,7 +133,7 @@
     </init-param>
   </servlet>
   <servlet-mapping>
-    <servlet-name>editBankAccount</servlet-name>
+    <servlet-name>editBankAccountButton</servlet-name>
     <url-pattern>/editBankAccount</url-pattern>
   </servlet-mapping>
 

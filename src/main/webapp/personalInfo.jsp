@@ -73,17 +73,21 @@
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="${pageContext.request.contextPath}/"><fmt:message key="label.home"/> </a></li>
-                <li class="current"><a href="${pageContext.request.contextPath}/profile">${sessionScope.user.name}</a></li>
-                <li><a href="${pageContext.request.contextPath}/signOutButton"><fmt:message key="label.signOut"/></a></li>
+                <li class="current"><a href="${pageContext.request.contextPath}/profile">${sessionScope.user.name}</a>
+                </li>
+                <li><a href="${pageContext.request.contextPath}/signOutButton"><fmt:message key="label.signOut"/></a>
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="${pageContext.request.contextPath}/profile/personalInfo"><fmt:message
                         key="label.personalInfo"/> </a></li>
                 <li><a href="${pageContext.request.contextPath}/profile/bankAccounts"><fmt:message
                         key="label.bankAccounts"/></a></li>
-                <li><a href="${pageContext.request.contextPath}/profile/rainyDay"><fmt:message key="label.rainyDay"/></a>
+                <li><a href="${pageContext.request.contextPath}/profile/rainyDay"><fmt:message
+                        key="label.rainyDay"/></a>
                 </li>
-                <li><a href="${pageContext.request.contextPath}/profile/unitBankAccounts"><fmt:message key="label.unit"/> <fmt:message key="label.bankAccount"/> </a></li>
+                <li><a href="${pageContext.request.contextPath}/profile/unitBankAccounts"><fmt:message
+                        key="label.unit"/> <fmt:message key="label.bankAccount"/> </a></li>
                 <li><a href="${pageContext.request.contextPath}/profile/edit"><fmt:message key="label.edit"/></a></li>
             </ul>
         </div>
@@ -91,41 +95,48 @@
 </div>
 
 
+<!-- Gallery section -->
+<section id="gallery" class="parallax-section">
+    <div class="container">
+        <div class="row">
 
-<div>
+            <div class="col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10">
+                <div class="wow fadeInUp section-title" data-wow-delay="0.3s">
+                    <h2><fmt:message key="label.personalInfo"/></h2>
+                </div>
+            </div>
+            <div class="iso-section wow fadeInUp" data-wow-delay="0.6s">
+                <div class="iso-box col-md-4 col-sm-6">
+                    <h3>${sessionScope.user.email}</h3>
+                </div>
 
-    <ul>
-        <li><a href="${pageContext.request.contextPath}/"><fmt:message key="label.home"/> </a></li>
-        <li class="current"><a href="${pageContext.request.contextPath}/profile">${sessionScope.user.name}</a></li>
-        <li><a href="${pageContext.request.contextPath}/signOutButton"><fmt:message key="label.signOut"/></a></li>
+                <div class=" iso-box col-md-4 col-sm-6">
+                    <h3>${sessionScope.user.name} ${sessionScope.user.surname}</h3>
+                </div>
 
-    </ul>
-    <p></p>
-    <ul>
-        <li><a href="${pageContext.request.contextPath}/profile/personalInfo"><fmt:message
-                key="label.personalInfo"/> </a></li>
-        <li><a href="${pageContext.request.contextPath}/profile/bankAccounts"><fmt:message
-                key="label.bankAccounts"/></a></li>
-        <li><a href="${pageContext.request.contextPath}/profile/rainyDay"><fmt:message key="label.rainyDay"/></a>
-        </li>
-        <li><a href="${pageContext.request.contextPath}/profile/unitBankAccounts"><fmt:message key="label.unit"/> <fmt:message key="label.bankAccount"/> </a></li>
-        <li><a href="${pageContext.request.contextPath}/profile/edit"><fmt:message key="label.edit"/></a></li>
-    </ul>
+                <div class="iso-box col-md-4 col-sm-6">
+                    <h3><fmt:message
+                            key="label.bankAccounts"/>: ${sessionScope.user.bankAccountList.size()}</h3>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
 
 
-    <header>
-        <h2>${sessionScope.user.name} ${sessionScope.user.surname}</h2>
-    </header>
+<!-- Copyright section -->
+<section id="copyright">
+    <div class="container">
+        <div class="row">
 
-    <header>
-        <h2>${sessionScope.user.email}</h2>
-    </header>
-
-    <header>
-        <h2><fmt:message key="label.bankAccounts"/>: ${sessionScope.user.bankAccountList.size()}</h2>
-    </header>
-
-</div>
+            <div class="col-md-8 col-sm-8 col-xs-8">
+                <p>Copyright © 2020 RFCT TEAM (KREIN, LEBEDEVSKIY, PYSTUNNIK) - <a rel="nofollow" class="designed-by" href="https://github.com/NikitaKrein/Financial-Assistant">Github</a></p>
+            </div>
+        </div>
+    </div>
+</section>
 
 </body>
 </html>
