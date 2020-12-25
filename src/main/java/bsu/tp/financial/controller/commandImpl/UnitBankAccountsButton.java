@@ -31,6 +31,9 @@ public class UnitBankAccountsButton implements Command {
         User user;
         try {
             user = userService.findUserByEmail(email);
+            if (user == null){
+                throw new CommandException("UnitBankAccountsButton failed, user does not exist", new RuntimeException());
+            }
             bankAccountService.createUserBankAccountRelationship(bankAccountId, user.getId());
         } catch (ServiceException exception){
             throw new CommandException("UnitBankAccountsButton failed ", exception);

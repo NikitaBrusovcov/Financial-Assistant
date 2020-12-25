@@ -96,62 +96,64 @@
 
 
 <!-- Feature section -->
-<section id="feature" class="parallax-section">
-    <div class="container">
-        <div class="row">
+<c:if test="${sessionScope.user.bankAccountList.size() > 1}">
+    <section id="feature" class="parallax-section">
+        <div class="container">
+            <div class="row">
 
-            <div class="col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10">
-                <div class="wow fadeInUp section-title" data-wow-delay="0.6s">
-                    <h2><fmt:message key="label.bankAccounts"/></h2>
-                </div>
-            </div>
-
-            <div class="clearfix"></div>
-
-            <c:forEach var="bankAccount" items="${sessionScope.user.bankAccountList}">
-                <c:if test="${bankAccount.title != 'rainyDay'}">
-                    <div class="col-md-4 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="feature-thumb">
-                            <div class="feature-icon">
-                                <span><i class="fa fa-bank"></i></span>
-                            </div>
-                            <h3>${bankAccount.title}</h3>
-                            <h4><fmt:message key="label.${bankAccount.currency}"/></h4>
-                            <h2>${bankAccount.amountOfMoney}</h2>
-                            <form method="post" action="${pageContext.request.contextPath}/profile/statement">
-                                <input type="hidden" name="id" value="${bankAccount.id}">
-                                <button class="btn-info"><fmt:message key="label.statement"/></button>
-                            </form>
-                            <form method="post" action="${pageContext.request.contextPath}/editBankAccountsMoneyValue">
-                                <input class="form-control" type="number" name="money" min=0 step="0.01" required
-                                       placeholder="<fmt:message key="label.amountOfMoney"/>">
-                                <input type="hidden" name="id" value="${bankAccount.id}">
-                                <input class="form-control" type="text" name="description"
-                                       placeholder="<fmt:message key="label.description"/>"
-                                       required>
-                                <button class="btn-success" name="action" value="add"><fmt:message
-                                        key="label.add"/></button>
-                                <button class="btn-danger" name="action" value="delete"><fmt:message
-                                        key="label.delete"/></button>
-                            </form>
-                            <form method="post" action="${pageContext.request.contextPath}/editBankAccount">
-                                <input type="hidden" name="id" value="${bankAccount.id}">
-                                <button class="btn-danger" name="actionBankAccount" value="delete"><fmt:message
-                                        key="label.delete"/> <fmt:message key="label.bankAccount"/></button>
-                            </form>
-                            <form action="${pageContext.request.contextPath}/profile/editBankAccount">
-                                <input type="hidden" name="id" value="${bankAccount.id}">
-                                <button class="btn-block">
-                                    <fmt:message key="label.edit"/> <fmt:message key="label.bankAccount"/>
-                                </button>
-                            </form>
-                        </div>
+                <div class="col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10">
+                    <div class="wow fadeInUp section-title" data-wow-delay="0.6s">
+                        <h2><fmt:message key="label.bankAccounts"/></h2>
                     </div>
-                </c:if>
-            </c:forEach>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <c:forEach var="bankAccount" items="${sessionScope.user.bankAccountList}">
+                    <c:if test="${bankAccount.title != 'rainyDay'}">
+                        <div class="col-md-4 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
+                            <div class="feature-thumb">
+                                <div class="feature-icon">
+                                    <span><i class="fa fa-bank"></i></span>
+                                </div>
+                                <h3>${bankAccount.title}</h3>
+                                <h4><fmt:message key="label.${bankAccount.currency}"/></h4>
+                                <h2>${bankAccount.amountOfMoney}</h2>
+                                <form method="post" action="${pageContext.request.contextPath}/profile/statement">
+                                    <input type="hidden" name="id" value="${bankAccount.id}">
+                                    <button class="btn-info"><fmt:message key="label.statement"/></button>
+                                </form>
+                                <form method="post" action="${pageContext.request.contextPath}/editBankAccountsMoneyValue">
+                                    <input class="form-control" type="number" name="money" min=0 step="0.01" required
+                                           placeholder="<fmt:message key="label.amountOfMoney"/>">
+                                    <input type="hidden" name="id" value="${bankAccount.id}">
+                                    <input class="form-control" type="text" name="description"
+                                           placeholder="<fmt:message key="label.description"/>"
+                                           required>
+                                    <button class="btn-success" name="action" value="add"><fmt:message
+                                            key="label.add"/></button>
+                                    <button class="btn-danger" name="action" value="delete"><fmt:message
+                                            key="label.delete"/></button>
+                                </form>
+                                <form method="post" action="${pageContext.request.contextPath}/editBankAccount">
+                                    <input type="hidden" name="id" value="${bankAccount.id}">
+                                    <button class="btn-danger" name="actionBankAccount" value="delete"><fmt:message
+                                            key="label.delete"/> <fmt:message key="label.bankAccount"/></button>
+                                </form>
+                                <form action="${pageContext.request.contextPath}/profile/editBankAccount">
+                                    <input type="hidden" name="id" value="${bankAccount.id}">
+                                    <button class="btn-block">
+                                        <fmt:message key="label.edit"/> <fmt:message key="label.bankAccount"/>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </c:if>
+                </c:forEach>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+</c:if>
 
 <section id="feature" class="parallax-section">
     <div class="container">
