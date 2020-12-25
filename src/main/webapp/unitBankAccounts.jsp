@@ -88,7 +88,7 @@
                 </li>
                 <li><a href="${pageContext.request.contextPath}/profile/unitBankAccounts"><fmt:message
                         key="label.unit"/> <fmt:message key="label.bankAccount"/> </a></li>
-                <li><a href="${pageContext.request.contextPath}/profile/edit"><fmt:message key="label.edit"/></a></li>
+                <li><a href="${pageContext.request.contextPath}/profile/edit"><fmt:message key="label.updatePassword"/></a></li>
             </ul>
         </div>
     </div>
@@ -108,7 +108,7 @@
                     <input type="email" class="form-control" name="accountMail"
                            placeholder="<fmt:message key="label.email"/>" required>
                     <select class="form-control" required name="bankAccount">
-                        <option value="" disabled selected><fmt:message key="label.bankAccount"/></option>
+                        <option value="" disabled selected><fmt:message key="label.bankAccountCap"/></option>
                         <c:forEach var="bankAccount" items="${sessionScope.user.bankAccountList}">
                             <c:if test="${bankAccount.title != 'rainyDay'}">
                                 <option value="${bankAccount.id}"
