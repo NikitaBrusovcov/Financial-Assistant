@@ -20,7 +20,9 @@
 
     <h6><a href="${pageContext.request.contextPath}/languageButton?language=ru">ru</a>
         <a>|</a>
-        <a href="${pageContext.request.contextPath}/languageButton?language=en">en</a></h6>
+        <a href="${pageContext.request.contextPath}/languageButton?language=en">en</a>
+        <a>|</a>
+        <a href="${pageContext.request.contextPath}/languageButton?language=by">by</a></h6>
     <h1><a href="${pageContext.request.contextPath}/">Financial assistant</a></h1>
 
     <ul>
