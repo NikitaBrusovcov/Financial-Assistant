@@ -70,13 +70,16 @@ public class ForgotPasswordButton implements Command {
     private char randChar() {
         char c = 0;
         Random r = new Random();
-        switch ((int) (r.nextInt(3))) {
+        switch (r.nextInt(3)) {
             case 0:
                 c = (char) (r.nextInt(26) + 'A');
+                break;
             case 1:
                 c = (char) (r.nextInt(26) + 'a');
+                break;
             case 2:
                 c = (char) (r.nextInt(10) + '0');
+                break;
         }
         return c;
     }
