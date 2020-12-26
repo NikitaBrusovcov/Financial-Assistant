@@ -1,17 +1,26 @@
+<%@ page import="bsu.tp.financial.entity.Currency" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <fmt:setLocale value="${cookie['language'].value}"/>
 <fmt:setBundle basename="language"/>
+
 <html>
 <head>
-
     <!-- Start of HubSpot Embed Code -->
     <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/8927045.js"></script>
     <!-- End of HubSpot Embed Code -->
-    <title><fmt:message key="label.signIn"/></title>
+
+    <title><fmt:message key="label.forgotPassword"/></title>
     <meta charset="utf-8"/>
+
+    <style>
+        a {
+            text-decoration: none; /* Отменяем подчеркивание у ссылки */
+        }
+    </style>
+
 
     <!--
 
@@ -44,9 +53,8 @@
 
     <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600' rel='stylesheet' type='text/css'>
-
 </head>
-<body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
+<body>
 
 <!-- Navigation section -->
 <div class="navbar navbar-default navbar-static-top" role="navigation">
@@ -81,27 +89,21 @@
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
-
-
             <div class="col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10">
                 <div class="contact-form wow fadeInUp" data-wow-delay="0.7s">
-                    <h2><fmt:message key="label.signIn"/></h2>
+                    <h2><fmt:message key="label.forgotPassword"/></h2>
                 </div>
-                <form id="contact-form" method="post" action="${pageContext.request.contextPath}/signInButton">
+                <form id="contact-form" method="post" action="${pageContext.request.contextPath}/forgotPasswordButton">
                     <input type="email" name="email" class="form-control" required
                            placeholder="<fmt:message key="label.email"/>">
-                    <input type="password" name="password" class="form-control" required
-                           placeholder="<fmt:message key="label.password"/>">
+
                     <input type="submit" class="form-control submit" value=
-                    <fmt:message key="label.signInButton"/>>
-                    <a class="form-control submit" href="${pageContext.request.contextPath}/forgotPassword"><fmt:message key="label.forgotPassword"/> </a>
+                    <fmt:message key="label.sendToMail"/>>
                 </form>
             </div>
         </div>
-
     </div>
 </section>
-
 
 <!-- Copyright section -->
 <section id="copyright">
@@ -116,5 +118,6 @@
         </div>
     </div>
 </section>
+
 </body>
 </html>

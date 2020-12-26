@@ -11,6 +11,7 @@ public enum CommandName {
     DELETE_PROFILE_BUTTON("/deleteProfileButton", new DeleteProfileButton()),
     DELETE_USER_BY_ADMIN_BUTTON("/deleteUserByAdminButton", new DeleteUserByAdminButton()),
     EDIT_BANK_ACCOUNT_BUTTON("/editBankAccount", new EditBankAccountButton()),
+    FORGOT_PASSWORD_BUTTON("/forgotPassword", new ForgotPasswordButton()),
     CREATE_ADMIN_BUTTON("/admins", new CreateAdminButton()),
     ADMINS("/adminAdmins.jsp", new Admins()),
     ADMIN_PROFILE("/adminProfile", new SignInButton()),

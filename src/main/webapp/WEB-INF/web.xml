@@ -15,6 +15,28 @@
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>forgotPassword</servlet-name>
+    <jsp-file>/forgotPassword.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>forgotPassword</servlet-name>
+    <url-pattern>/forgotPassword</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>forgotPasswordButton</servlet-name>
+    <servlet-class>bsu.tp.financial.controller.ControllerServlet</servlet-class>
+    <init-param>
+      <param-name>command</param-name>
+      <param-value>forgot_password_button</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>forgotPasswordButton</servlet-name>
+    <url-pattern>/forgotPasswordButton</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>signIn</servlet-name>
     <jsp-file>/signIn.jsp</jsp-file>
   </servlet>
@@ -283,6 +305,9 @@
     <url-pattern>/signUp</url-pattern>
     <url-pattern>/signIn.jsp</url-pattern>
     <url-pattern>/signUp.jsp</url-pattern>
+    <url-pattern>/forgotPassword</url-pattern>
+    <url-pattern>/forgotPasswordButton</url-pattern>
+    <url-pattern>/forgotPassword.jsp</url-pattern>
   </filter-mapping>
 
   <filter>
