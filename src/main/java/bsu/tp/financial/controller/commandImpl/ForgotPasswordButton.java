@@ -58,7 +58,7 @@ public class ForgotPasswordButton implements Command {
     }
 
     private String newPassword(int size){
-        StringBuilder password = new StringBuilder();
+        StringBuilder password = new StringBuilder("New password: ");
         for (int i = 0; i < size; i++){
             password.append('a');
         }
