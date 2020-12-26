@@ -113,7 +113,7 @@
                             <td>${user.email}</td>
                         </li>
                         <li>
-                            <td><fmt:message key="label.bankAccounts"/> ${user.bankAccountList.size()}</td>
+                            <td><fmt:message key="label.bankAccounts"/> ${user.bankAccountList.size() - 1}</td>
                             <td>
                                 <form action="${pageContext.request.contextPath}/deleteUserByAdminButton">
                                     <input type="hidden" name="id" value="${user.id}">

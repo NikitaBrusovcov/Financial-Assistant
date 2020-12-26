@@ -104,7 +104,7 @@
         <div class="row">
             <div class="col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10">
                 <div class="contact-form wow fadeInUp" data-wow-delay="0.7s">
-                    <h2><fmt:message key="label.edit"/></h2>
+                    <h2><fmt:message key="label.updatePassword"/></h2>
                 </div>
                 <form id="contact-form" method="post" action="${pageContext.request.contextPath}/editProfileButton">
 
