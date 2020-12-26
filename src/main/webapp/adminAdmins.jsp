@@ -120,7 +120,7 @@
 
             <div class="col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10">
                 <div class="contact-form wow fadeInUp" data-wow-delay="0.7s">
-                    <h2><fmt:message key="label.create"/> <fmt:message key="label.admin"/></h2>
+                    <h2><fmt:message key="label.create"/></h2>
                 </div>
                 <form id="contact-form" method="post" action="${pageContext.request.contextPath}/createAdminButton">
                     <input type="email" class="form-control" required placeholder="<fmt:message key="label.email"/>"
@@ -132,7 +132,7 @@
                            placeholder="<fmt:message key="label.repeatPassword"/>" name="repeatPassword"
                            minlength="6">
                     <input type="submit" class="form-control submit" value=
-                    <fmt:message key="label.add"/>>
+                    <fmt:message key="label.create"/>>
                 </form>
             </div>
         </div>

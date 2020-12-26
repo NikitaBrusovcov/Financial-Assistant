@@ -10,7 +10,7 @@
     <!-- Start of HubSpot Embed Code -->
     <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/8927045.js"></script>
     <!-- End of HubSpot Embed Code -->
-    <title><fmt:message key="label.edit"/></title>
+    <title><fmt:message key="label.updatePassword"/></title>
     <meta charset="utf-8"/>
 
     <!--
@@ -97,7 +97,7 @@
         <div class="row">
             <div class="col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10">
                 <div class="contact-form wow fadeInUp" data-wow-delay="0.7s">
-                    <h2><fmt:message key="label.edit"/></h2>
+                    <h2><fmt:message key="label.updatePassword"/></h2>
                 </div>
                 <form id="contact-form" method="post" action="${pageContext.request.contextPath}/editProfileButton">
 
