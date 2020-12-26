@@ -116,7 +116,7 @@
 
                 <div class="iso-box col-md-4 col-sm-6">
                     <h3><fmt:message
-                            key="label.bankAccounts"/>: ${sessionScope.user.bankAccountList.size()}</h3>
+                            key="label.bankAccounts"/>: ${sessionScope.user.bankAccountList.size() - 1}</h3>
                 </div>
             </div>
 
