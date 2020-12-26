@@ -24,7 +24,7 @@ public class MailServiceImpl implements MailService {
     private final Properties prop = System.getProperties();
 
     private String emailTo;
-    private String emailSubject = "Bank account statement";
+    //private String emailSubject = "Bank account statement";
 
 
     private void setProperties() {
@@ -35,7 +35,7 @@ public class MailServiceImpl implements MailService {
 
     }
 
-    private Message createMessage(Session session, String text) throws MessagingException {
+    private Message createMessage(Session session, String emailSubject, String text) throws MessagingException {
 
         Message msg = new MimeMessage(session);
 
@@ -76,12 +76,12 @@ public class MailServiceImpl implements MailService {
     }
 
     @Override
-    public void sendMail(String email, BankAccount bankAccount) {
+    public void sendMail(String emailSubject, String emailText, String email) {
         emailTo = email;
         setProperties();
         try {
             Session session = Session.getInstance(prop, null);
-            Message message = createMessage(session, createStatement(bankAccount));
+            Message message = createMessage(session, emailSubject, emailText);
             sendMailWithSMTP(session, message);
         } catch (MessagingException ex) {
             throw new ServiceException("MailService failed", ex);
