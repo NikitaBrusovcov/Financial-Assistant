@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Random;
 
 public class ForgotPasswordButton implements Command {
 
@@ -27,28 +28,28 @@ public class ForgotPasswordButton implements Command {
     public CommandName callCommandMethod(HttpServletRequest req) {
         if (HttpUtils.isMethodGet(req)) {
             logger.info("Failed, call method get in ForgotPasswordButton");
-            throw new CommandException("ForgotPasswordButton failed",  new RuntimeException());
+            throw new CommandException("ForgotPasswordButton failed", new RuntimeException());
         }
 
         String email = HttpUtils.checkRequestParameter(req, "email");
-        String password = newPassword(6);
+        String password = createNewPassword(6);
         SecurityServiceImpl securityService = new SecurityServiceImpl();
         char[] newPassword = securityService.createPassword(password);
 
         try {
             User user = userService.findUserByEmail(email);
-            if(user != null){
+            if (user != null) {
                 user.setPassword(newPassword);
                 userService.updateUser(user);
-                mailService.sendMail("New password", password, user.getEmail());
-            }
-            else{
+                String text = new String("New password: " + password);
+                mailService.sendMail("New password", text, user.getEmail());
+            } else {
                 logger.info("Failed ForgotPasswordButton, user does not exist. (Email: " + email + ")");
                 throw new CommandException("ForgotPasswordButton failed", new RuntimeException());
 
             }
 
-        } catch (ServiceException exception){
+        } catch (ServiceException exception) {
             throw new CommandException("ForgotPasswordButton failed ", exception);
         }
 
@@ -57,11 +58,29 @@ public class ForgotPasswordButton implements Command {
         return CommandName.SIGN_IN_BUTTON;
     }
 
-    private String newPassword(int size){
-        StringBuilder password = new StringBuilder("New password: ");
-        for (int i = 0; i < size; i++){
-            password.append('a');
+    private String createNewPassword(int size) {
+        StringBuilder password = new StringBuilder();
+        for (int i = 0; i < size; i++) {
+            char a = randChar();
+            password.append(a);
         }
         return password.toString();
+    }
+
+    private char randChar() {
+        char c = 0;
+        Random r = new Random();
+        switch (r.nextInt(3)) {
+            case 0:
+                c = (char) (r.nextInt(26) + 'A');
+                break;
+            case 1:
+                c = (char) (r.nextInt(26) + 'a');
+                break;
+            case 2:
+                c = (char) (r.nextInt(10) + '0');
+                break;
+        }
+        return c;
     }
 }
